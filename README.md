@@ -15,12 +15,12 @@ As a user, you rate and view ratings from other platform members and receive per
 ## 🛠️ Technologies Used
 
 ### **Frontend**
-- React.js + Vite ⚛️
+-  Python + Flask 🐍
 - TailwindCSS 🎨
 - Vercel (Hosting) ☁️
 
 ### **Backend**
-- Python + Flask 🐍
+- React.js + Vite ⚛️
 - Railway (Hosting) 🚆
 
 ### **Database**
