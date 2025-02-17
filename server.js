@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./db"); // Import the connection to MongoDB
 const app = express();
-const rateLimit = require("express-rate-limit");
+//const rateLimit = require("express-rate-limit");
 
 
 // Connect to MongoDB before starting the server
@@ -16,7 +16,7 @@ connectDB();
     // message: "try latter.",
   // });
   
-app.use(limiter);
+//app.use(limiter);
 app.use(express.json());
 app.use(cors());
 
