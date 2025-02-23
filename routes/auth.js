@@ -2,10 +2,11 @@ const express = require("express");
 const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const protect = require("../middlewares/auth");
 
 const router = express.Router();
 
-// Route to register a user
+// route to register a user
 router.post(
   "/register",
   [
@@ -36,7 +37,18 @@ router.post(
   }
 );
 
-// Login route
+// route to list all users
+router.get("/", protect, async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: "Error when searching for users" });
+  }
+});
+
+
+// login route
 router.post(
   "/login",
   [

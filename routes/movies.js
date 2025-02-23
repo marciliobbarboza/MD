@@ -17,18 +17,18 @@ router.get("/", async (req, res) => {
 // Route to add a new movie
 router.post("/", async (req, res) => {
     try {
-        const { title, genre, rating } = req.body;
+        const { title, genre, rating, year } = req.body;
         //console.log("Received genre:", genre); // To see what is arriving on the server
 
-        if(!title || !genre || !rating ) {
-            return res.status(400).json({ error: "Title, genre, and rating are required" });
+        if(!title || !genre || !rating || !year ) {
+            return res.status(400).json({ error: "Title, genre, rating and year are required" });
         }
 
         if (!Array.isArray(genre)) {
             return res.status(400).json({ error: "Genre must be an array" });
         }
 
-        const newMovie = new Movie({ title, genre, rating });
+        const newMovie = new Movie({ title, genre, rating, year });
         await newMovie.save();
         res.status(201).json(newMovie);
     } catch (error) {
@@ -40,10 +40,10 @@ router.post("/", async (req, res) => {
 // Update a movie by ID
 router.put("/:id", async (req, res) => {
     try {
-        const { title, rating, genre } = req.body;
+        const { title, rating, genre, year } = req.body;
         const updatedMovie = await Movie.findByIdAndUpdate(
             req.params.id, // movie ID
-            { title, rating, genre }, // Data to be updated
+            { title, rating, genre, year }, // Data to be updated
             { new: true } // Returns the new updated document
         );
 

@@ -20,7 +20,7 @@ connectDB();
 app.use(express.json());
 app.use(cors());
 
-// Autentification rotes
+// autentification rotes
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
 
@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
     res.send("API working!");
 });
 
-// Import routes after connecting to the bank
+// import routes after connecting to the bank
 const movieRoutes = require("./routes/movies");
 app.use("/api/movies", movieRoutes);
 
