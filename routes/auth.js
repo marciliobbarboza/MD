@@ -38,7 +38,7 @@ router.post(
 );
 
 // route to list all users
-router.get("/", protect, async (req, res) => {
+router.get("/users", protect, async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -74,7 +74,7 @@ router.post(
         return res.status(400).json({ error: "Invalid credentials" });
       }
 
-      const token = jwt.sign({ userId: user._id }, "secrectKey", { expiresIn: "1h" });
+      const token = jwt.sign({ userId: user._id }, "secretKey", { expiresIn: "1h" });
 
       res.json({ token });
     } catch (error) {
