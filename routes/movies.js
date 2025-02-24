@@ -5,30 +5,44 @@ const Movie = require("../models/moviesTR");
 // Route to list all movies
 router.get("/", async (req, res) => {
     try {
-        const { genre } = req.query;
-        const filter = genre ? { genre: {$in: genre.split(',') } } : {};
+        const { genre, type } = req.query; //getting parameters from URL
+
+        let filter = {};
+
+        if (genre) {
+            filter.genre = { $in: genre.split(',') };
+        }
+
+        if (type) {
+            filter.type = type; // filter by "movie" or "series"
+        }
+
         const movies = await Movie.find(filter);
         res.json(movies);
     } catch (error) {
-        res.status(500).json({ error: "Error when searching for movies" });
+        res.status(500).json({ error: "Error when searching for movies and series" });
     }
 });
 
 // Route to add a new movie
 router.post("/", async (req, res) => {
     try {
-        const { title, genre, rating, year } = req.body;
+        const { title, genre, rating, year, type } = req.body;
         //console.log("Received genre:", genre); // To see what is arriving on the server
 
-        if(!title || !genre || !rating || !year ) {
-            return res.status(400).json({ error: "Title, genre, rating and year are required" });
+        if(!title || !genre || !rating || !year || !type ) {
+            return res.status(400).json({ error: "title, genre, rating, year and type are required" });
+        }
+
+        if (!["movie", "series"].includes(type)) {
+            return res.status(400).json({ error: "Type must be 'movie' or 'series'" });
         }
 
         if (!Array.isArray(genre)) {
-            return res.status(400).json({ error: "Genre must be an array" });
+            return res.status(400).json({ error: "genre must be an array" });
         }
 
-        const newMovie = new Movie({ title, genre, rating, year });
+        const newMovie = new Movie({ title, genre, rating, year, type });
         await newMovie.save();
         res.status(201).json(newMovie);
     } catch (error) {
@@ -40,15 +54,20 @@ router.post("/", async (req, res) => {
 // Update a movie by ID
 router.put("/:id", async (req, res) => {
     try {
-        const { title, rating, genre, year } = req.body;
+        const { title, rating, genre, year, type } = req.body;
+
+        if (type && !["movie", "series"].includes(type)) {
+            return res.status(400).json({ error: "Type must be 'movie' or 'series'" });
+        }
+
         const updatedMovie = await Movie.findByIdAndUpdate(
             req.params.id, // movie ID
-            { title, rating, genre, year }, // Data to be updated
+            { title, rating, genre, year, type }, // Data to be updated
             { new: true } // Returns the new updated document
         );
 
         if (!updatedMovie) {
-            return res.status(404).json({ error: "Movie not found" });
+            return res.status(404).json({ error: "Movie or Series not found" });
         }
 
         res.json(updatedMovie);
