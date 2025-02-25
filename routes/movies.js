@@ -1,28 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Movie = require("../models/moviesTR");
-
-// Route to list all movies
-router.get("/", async (req, res) => {
-    try {
-        const { genre, type } = req.query; //getting parameters from URL
-
-        let filter = {};
-
-        if (genre) {
-            filter.genre = { $in: genre.split(',') };
-        }
-
-        if (type) {
-            filter.type = type; // filter by "movie" or "series"
-        }
-
-        const movies = await Movie.find(filter);
-        res.json(movies);
-    } catch (error) {
-        res.status(500).json({ error: "Error when searching for movies and series" });
-    }
-});
+const protect = require("../middlewares/auth");
 
 // Route to add a new movie
 router.post("/", async (req, res) => {
@@ -51,6 +30,31 @@ router.post("/", async (req, res) => {
 
 });
 
+
+// Route to list all movies
+router.get("/", async (req, res) => {
+    try {
+        const { genre, type } = req.query; //getting parameters from URL
+
+        let filter = {};
+
+        if (genre) {
+            filter.genre = { $in: genre.split(',') };
+        }
+
+        if (type) {
+            filter.type = type; // filter by "movie" or "series"
+        }
+
+        const movies = await Movie.find(filter);
+        res.json(movies);
+    } catch (error) {
+        res.status(500).json({ error: "Error when searching for movies and series" });
+    }
+});
+
+
+
 // Update a movie by ID
 router.put("/:id", async (req, res) => {
     try {
@@ -76,6 +80,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+
 // Deleting a movie by ID
 router.delete("/:id", async (req, res) => {
     try {
@@ -88,6 +93,92 @@ router.delete("/:id", async (req, res) => {
         res.json({ message: "Successfully deleted movie" });
     } catch (error) {
         res.status(500).json({ error: "Error when deleting the movie" });
+    }
+});
+
+
+// Create or update assessment
+router.post("/:id/review", protect, async (req, res) => {
+    const { rating } = req.body;
+    const movieId = req.params.id;
+    const userId = req.userId; // the userID will be filled by the middleware when the tolken is send
+
+    if (!rating || rating < 1 || rating > 5) {
+        return res.status(400).json({ error: "Rating must be between 1 and 5." });
+    }
+
+    try {
+        // check if the media exist
+        const movie = await Movie.findById(movieId);
+        if (!movie) {
+            return res.status(404).json({ error: "Movie not found" });
+        }
+
+        // check if user have review
+        let review = movie.reviews.find(review => review.userId.toString() === userId);
+
+        if (review) {
+            // if yes update the rview
+            review.rating = rating;
+        } else {
+            // if not create a new
+            movie.reviews.push({ userId, rating });
+        }
+
+        // recalculate the average of reviews
+        const totalRatings = movie.reviews.length;
+        const totalScore = movie.reviews.reduce((acc, review) => acc + review.rating, 0);
+        movie.rating = totalScore / totalRatings; 
+
+        await movie.save();
+
+        res.status(200).json({ message: "Review added/updated successfully" });
+    } catch (error) {
+        res.status(500).json({ error: "Error adding/updating review" });
+    }
+});
+
+// Get info from media
+router.get("/:id", protect, async (req, res) => {
+    const movieId = req.params.id;
+    const userId = req.userId; // userId for logged users
+
+    try {
+        const movie = await Movie.findById(movieId);
+
+        if (!movie) {
+            return res.status(404).json({ error: "Movie not found" });
+        }
+
+        let userRating = null;
+        if (userId) {
+            // show logged user reviews
+            const review = movie.reviews.find(review => review.userId.toString() === userId);
+            if (review) {
+                userRating = review.rating;
+            }
+        }
+
+        // calculate percentage of reviews
+        const ratingPercentages = movie.reviews.reduce((acc, review) => {
+            acc[review.rating] = (acc[review.rating] || 0) + 1;
+            return acc;
+        }, {});
+
+        // calculate of reviews
+        const totalReviews = movie.reviews.length;
+        for (let rating in ratingPercentages) {
+            ratingPercentages[rating] = `${((ratingPercentages[rating] / totalReviews) * 100).toFixed(2)}%`;
+        }
+
+        // show all info
+        res.json({
+            ...movie.toObject(),
+            userRating,  
+            ratingPercentages
+        });
+    } catch (error) {
+        res.status(500).json({ error: "Error fetching movie details" });
     }
 });
 
