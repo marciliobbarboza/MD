@@ -6,11 +6,7 @@ npm install jsonwebtoken bcryptjs express-validator express-rate-limit
 
 
 
-//{{base_url}}/api/auth/register GET/POST
+npm install cloudinary multer multer-storage-cloudinary
 
-///{{base_url}}api/movies GET/POST
 
-{
-        "title": "The Mist",
-        "rating": 4,
-    }
+npm install streamifier

@@ -2,14 +2,21 @@ const express = require("express");
 const router = express.Router();
 const Movie = require("../models/moviesTR");
 const protect = require("../middlewares/auth");
+const upload = require("../middlewares/upload");
+const cloudinary = require("../config/cloudinary");
+const streamifier = require("streamifier")
 
 // Route to add a new movie
-router.post("/", async (req, res) => {
+router.post("/", upload.single("poster"), async (req, res) => {
     try {
-        const { title, genre, rating, year, type } = req.body;
+        let { title, genre, rating, year, type } = req.body;
         //console.log("Received genre:", genre); // To see what is arriving on the server
 
-        if(!title || !genre || !rating || !year || !type ) {
+        if (typeof genre === "string") {
+            genre = JSON.parse(genre);
+        }
+
+        if(!title || !genre || !rating || !year || !type || !req.file ) {
             return res.status(400).json({ error: "title, genre, rating, year and type are required" });
         }
 
@@ -21,10 +28,27 @@ router.post("/", async (req, res) => {
             return res.status(400).json({ error: "genre must be an array" });
         }
 
-        const newMovie = new Movie({ title, genre, rating, year, type });
+        const streamUpload = (file) => {
+            return new Promise((resolve, reject) => {
+                const stream = cloudinary.uploader.upload_stream((error, result) => {
+                    if (result) {
+                        resolve(result);
+                    } else {
+                        reject(error);
+                    }
+                });
+                streamifier.createReadStream(file.buffer).pipe(stream);
+            });
+        };
+
+    const result = await streamUpload(req.file); // image url in Cloudinary
+
+        const newMovie = new Movie({ title, genre, rating, year, type, poster: result.secure_url, });
         await newMovie.save();
+
         res.status(201).json(newMovie);
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: "Error adding movie" });
     }
 

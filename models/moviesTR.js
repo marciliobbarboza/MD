@@ -6,6 +6,7 @@ const movieSchema = new mongoose.Schema({
     rating: { type: Number, required: true, min: 1, max: 5 },
     year: { type: Number, required: true},
     type: { type: String, enum: ["movie", "series"], required: true },
+    poster: { type: String, required: true },
     reviews: [
         {
             userId:{type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }, //user Id
