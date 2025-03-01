@@ -4,10 +4,11 @@ const Movie = require("../models/moviesTR");
 const protect = require("../middlewares/auth");
 const upload = require("../middlewares/upload");
 const cloudinary = require("../config/cloudinary");
-const streamifier = require("streamifier")
+const streamifier = require("streamifier");
+const checkAdmin = require("../middlewares/checkAdmin");
 
 // Route to add a new movie
-router.post("/", upload.single("poster"), async (req, res) => {
+router.post("/", protect, checkAdmin, upload.single("poster"), async (req, res) => {
     try {
         let { title, genre, rating, year, type } = req.body;
         //console.log("Received genre:", genre); // To see what is arriving on the server
@@ -80,7 +81,7 @@ router.get("/", async (req, res) => {
 
 
 // Update a movie by ID
-router.put("/:id", async (req, res) => {
+router.put("/:id",protect, checkAdmin, async (req, res) => {
     try {
         const { title, rating, genre, year, type } = req.body;
 
@@ -106,7 +107,7 @@ router.put("/:id", async (req, res) => {
 
 
 // Deleting a movie by ID
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", protect, checkAdmin, async (req, res) => {
     try {
         const deletedMovie = await Movie.findByIdAndDelete(req.params.id);
 
@@ -163,7 +164,7 @@ router.post("/:id/review", protect, async (req, res) => {
 });
 
 // Get info from media
-router.get("/:id", protect, async (req, res) => {
+router.get("/:id", async (req, res) => {
     const movieId = req.params.id;
     const userId = req.userId; // userId for logged users
 
