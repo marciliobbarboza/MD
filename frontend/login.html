@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    
+    <nav>
+        <img src="MoreOrLess.png">
+    </nav>
+
+    <div class="container">
+        <h2>Sign in</h2>
+        <form id="loginForm">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" required>
+            
+            <div class="buttons">
+                <button type="submit" class="login-btn">Login</button>
+                <button type="button" class="create-btn" onclick="redirectTo('create-account.html')">Create account</button>
+                <button type="button" class="back-btn" onclick="redirectTo('index.html')">Back</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert('Login successful!');
+                    // Store the token and redirect to the main page or dashboard
+                    localStorage.setItem('token', result.token);
+                    window.location.href = 'main-page.html';
+                } else {
+                    alert(result.error || 'Error logging in');
+                }
+            } catch (error) {
+                alert('Error logging in');
+            }
+        });
+    </script>
+
+</body>
+</html>

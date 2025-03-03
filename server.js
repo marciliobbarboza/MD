@@ -2,23 +2,15 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./db"); // Import the connection to MongoDB
+const path = require("path");
 const app = express();
-//const rateLimit = require("express-rate-limit");
 
-
-// Connect to MongoDB before starting the server
 connectDB();
 
-// Rate Limiting
-// const limiter = rateLimit({
-    // windowMs: 15 * 60 * 1000, // 15 minutos
-   //  max: 100, // Limita a 100 requisições por IP
-    // message: "try latter.",
-  // });
-  
 //app.use(limiter);
 app.use(express.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'frontend')));
 
 // autentification rotes
 const authRoutes = require("./routes/auth");

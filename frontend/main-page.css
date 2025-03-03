@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+body {
+    background-color: #4B88D7;
+    font-family: 'Jua', sans-serif;
+    color: #F9F6EE;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: center; 
+    padding: 20px 100px;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    background: #ccc;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 15px; 
+}
+
+nav a {
+    color: #F9F6EE;
+    text-decoration: none;
+    margin: 0 10px; 
+    font-size: 2rem; 
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    font-size: 1.5rem;
+    color: #F9F6EE;
+}
+
+.search-input {
+    display: none;
+    margin-left: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search-icon:hover + .search-input,
+.search-input:focus {
+    display: block;
+}
+
+main {
+    padding: 39px; 
+}
+
+h1 {
+    font-size: 3.5rem; 
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    gap: 50px; 
+    margin: 40px 0; 
+}
+
+.filters label {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    font-size: 1.5rem; 
+}
+
+.genre {
+    margin: 50px 0; 
+}
+
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.card {
+    width: 150px; 
+    height: 230px; 
+    background: lightgray;
+    border-radius: 10px;
+}
+
+.prev, .next {
+    background: none;
+    border: none;
+    font-size: 2rem; 
+    color: #F9F6EE;
+    cursor: pointer;
+}
