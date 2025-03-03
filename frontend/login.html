@@ -8,7 +8,6 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    
     <nav>
         <img src="MoreOrLess.png">
     </nav>
@@ -24,7 +23,7 @@
             
             <div class="buttons">
                 <button type="submit" class="login-btn">Login</button>
-                <button type="button" class="create-btn" onclick="redirectTo('create-account.html')">Create account</button>
+                <button type="button" class="create-btn" onclick="redirectTo('create-account.html')">Create Account</button>
                 <button type="button" class="back-btn" onclick="redirectTo('index.html')">Back</button>
             </div>
         </form>
@@ -37,7 +36,7 @@
             const password = document.getElementById('password').value;
 
             try {
-                const response = await fetch('/api/login', {
+                const response = await fetch('/api/auth/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
@@ -46,9 +45,9 @@
                 const result = await response.json();
                 if (response.ok) {
                     alert('Login successful!');
-                    // Store the token and redirect to the main page or dashboard
+                    localStorage.setItem('username', result.username);
                     localStorage.setItem('token', result.token);
-                    window.location.href = 'main-page.html';
+                    window.location.href = 'main-page.html'; 
                 } else {
                     alert(result.error || 'Error logging in');
                 }
@@ -57,6 +56,5 @@
             }
         });
     </script>
-
 </body>
 </html>

@@ -12,7 +12,6 @@
     <nav>
         <img src="MoreOrLess.png">
     </nav>
-
     <div class="container">
         <h2>Create account</h2>
         <form id="createAccountForm">
@@ -48,7 +47,8 @@
                 const result = await response.json();
                 if (response.ok) {
                     alert('Account created successfully!');
-                    window.location.href = 'login.html';
+                    localStorage.setItem('username', name); // Store the username
+                    window.location.href = 'main-page.html'; // Redirect to main page
                 } else {
                     alert(result.error || 'Error creating account');
                 }
