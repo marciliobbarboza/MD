@@ -10,8 +10,44 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('createAccountLink').style.display = 'none';
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const username = localStorage.getItem('username');
+    const userButton = document.getElementById('userButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const logoutButton = document.getElementById('logoutButton');
+
+    if (username) {
+        document.getElementById('username').textContent = username;
+        document.getElementById('loginLink').style.display = 'none';
+        document.getElementById('createAccountLink').style.display = 'none';
+        userButton.style.display = 'flex';
+    } else {
+        userButton.style.display = 'none';
+    }
+
+    // toggle menu visibility when clicking on name
+    userButton.addEventListener("click", () => {
+        dropdownMenu.classList.toggle("show");
+    });
+
+    
+    logoutButton.addEventListener("click", () => {
+        localStorage.removeItem('username');
+        window.location.href = "index.html";
+    });
+
+    // close dropdown if click outside
+    window.addEventListener("click", (event) => {
+        if (!userButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.remove("show");
+        }
+    });
+});
+
+
 document.addEventListener("DOMContentLoaded", async () => {
-    const response = await fetch("http://localhost:5000/api/movies"); // Substitua pela URL correta da sua API
+    const response = await fetch("http://localhost:5000/api/movies"); 
     const movies = await response.json();
     
     const genreSections = {
@@ -37,11 +73,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 function generateStars(rating) {
     const starColors = {
-        1: "#E35F53",       // 1 estrela → Vermelho
-        2: "#FFE629",    // 2 estrelas → Amarelo
-        3: "#2BFF32",     // 3 estrelas → Verde
-        4: "#36F9E2",      // 4 estrelas → Azul
-        5: ["#E35F53", "#FFE629", "#2BFF32", "#36F9E2", "#1255FF"] // 5 estrelas → Todas as cores misturadas
+        1: "#E35F53",       
+        2: "#FFE629",    
+        3: "#2BFF32",     
+        4: "#36F9E2",      
+        5: ["#E35F53", "#FFE629", "#2BFF32", "#36F9E2", "#1255FF"] 
     };
 
     let stars = "";

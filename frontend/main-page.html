@@ -11,7 +11,16 @@
     <header>
         <nav>
             <img src="MoreOrLess.png">
-            <span id="username"></span> 
+            <div class="user-menu">
+                <button id="userButton">
+                    <i class="fas fa-user"></i>
+                    <span id="username"></span>
+                </button>
+                <div id="dropdownMenu" class="dropdown">
+                    <a href="#">Profile</a>
+                    <button id="logoutButton">Logout</button>
+                </div>
+            </div>
             <a id="loginLink" href="login.html">Login</a>
             <a id="createAccountLink" href="create-account.html">Create Account</a>
             <button id="logoutButton" style="display:none;">Logout</button>
@@ -32,7 +41,7 @@
             <h3>music</h3>
             <div class="carousel">
                 <button class="prev">&#9664;</button>
-                <!-- Os cards serão inseridos aqui -->
+                <!-- cards will be inserted here -->
                 <button class="next">&#9654;</button>
             </div>
         </section>
@@ -41,7 +50,7 @@
             <h3>Action</h3>
             <div class="carousel">
                 <button class="prev">&#9664;</button>
-                <!-- Os cards serão inseridos aqui -->
+                
                 <button class="next">&#9654;</button>
             </div>
         </section>
@@ -50,7 +59,7 @@
             <h3>drama</h3>
             <div class="carousel">
                 <button class="prev">&#9664;</button>
-                <!-- Os cards serão inseridos aqui -->
+                
                 <button class="next">&#9654;</button>
             </div>
         </section>

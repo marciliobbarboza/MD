@@ -82,7 +82,7 @@ h1 {
 }
 
 .genre-section {
-    margin-bottom: 80px; /* Ajuste o valor conforme necessário para obter o espaçamento desejado */
+    margin-bottom: 80px; 
 }
 
 .carousel {
@@ -138,4 +138,58 @@ h1 {
     font-size: 2rem; 
     color: #F9F6EE;
     cursor: pointer;
+}
+
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+#userButton {
+    background: none;
+    border: none;
+    color: #FFC107;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#userButton i {
+    font-size: 1.8rem;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #F9F6EE;
+    color: #4B88D7;
+    min-width: 120px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    padding: 10px;
+}
+
+.dropdown a, .dropdown button {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    color: #4B88D7;
+    font-size: 1rem;
+    padding: 8px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.dropdown a:hover, .dropdown button:hover {
+    background-color: #ddd;
+}
+
+.show {
+    display: block;
 }
