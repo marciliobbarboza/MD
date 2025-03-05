@@ -55,6 +55,12 @@ button {
     font-size: 1.6rem; 
     cursor: pointer;
     font-family: 'Jua', sans-serif;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.08); 
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); 
 }
 
 .login-btn {

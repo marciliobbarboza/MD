@@ -25,6 +25,12 @@ nav {
 nav a {
     text-decoration: none;
     color: #F9F6EE;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+    color: #FFD700; 
+    transform: scale(1.1); 
 }
 
 
@@ -60,3 +66,4 @@ nav a {
     margin-top: 130px;
     opacity: 0.8;
 }
+

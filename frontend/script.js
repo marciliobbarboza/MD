@@ -48,13 +48,14 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", async () => {
     const username = localStorage.getItem("username");
     const userSpan = document.getElementById("username");
+    const createButton = document.getElementById("createButton");
 
     if (username) {
         userSpan.textContent = username;
         document.getElementById("loginLink").style.display = "none";
         document.getElementById("createAccountLink").style.display = "none";
 
-        // Verifica se o usuário é admin
+        // checks if the user is admin
         try {
             const response = await fetch("http://localhost:5000/api/check-admin", {
                 method: "GET",
@@ -64,19 +65,17 @@ document.addEventListener("DOMContentLoaded", async () => {
             });
 
             if (response.ok) {
-                // Admin: cor azul
                 userSpan.style.color = "#1255FF";
+                createButton.style.display = "block";
+            
             } else {
-                // Não admin: cor padrão
-                userSpan.style.color = "#FFC107"; // Mantendo a cor padrão para usuários normais
+                userSpan.style.color = "#FFC107"; 
             }
         } catch (error) {
-            console.error("Erro ao verificar se o usuário é admin:", error);
+            console.error("Error when checking if the user is admin:", error);
         }
     }
 });
-
-
 
 
 document.addEventListener("DOMContentLoaded", async () => {
