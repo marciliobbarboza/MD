@@ -16,6 +16,10 @@ app.use(express.static(path.join(__dirname, 'frontend')));
 const authRoutes = require("./routes/auth");
 app.use("/api/auth", authRoutes);
 
+// importação da nova rota admin
+const adminRoutes = require("./routes/admin");
+app.use("/api", adminRoutes); // Adiciona as rotas de admin
+
 
 app.get("/", (req, res) => {
     res.send("API working!");

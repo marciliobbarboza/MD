@@ -45,6 +45,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", async () => {
+    const username = localStorage.getItem("username");
+    const userSpan = document.getElementById("username");
+
+    if (username) {
+        userSpan.textContent = username;
+        document.getElementById("loginLink").style.display = "none";
+        document.getElementById("createAccountLink").style.display = "none";
+
+        // Verifica se o usuário é admin
+        try {
+            const response = await fetch("http://localhost:5000/api/check-admin", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+
+            if (response.ok) {
+                // Admin: cor azul
+                userSpan.style.color = "#1255FF";
+            } else {
+                // Não admin: cor padrão
+                userSpan.style.color = "#FFC107"; // Mantendo a cor padrão para usuários normais
+            }
+        } catch (error) {
+            console.error("Erro ao verificar se o usuário é admin:", error);
+        }
+    }
+});
+
+
+
 
 document.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch("http://localhost:5000/api/movies"); 
