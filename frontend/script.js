@@ -126,3 +126,50 @@ function generateStars(rating) {
 
     return stars;
 }
+
+document.getElementById("createMovie").addEventListener("click", () => {
+    window.location.href = "new-movie.html";
+});
+
+
+document.getElementById("movieForm").addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const title = document.getElementById("title").value;
+    const genre = document.getElementById("genre").value;
+    const rating = document.getElementById("rating").value;
+    const year = document.getElementById("year").value;
+    const typeMovie = document.getElementById("typeMovie").checked;
+    const typeSeries = document.getElementById("typeSeries").checked;
+    const posterInput = document.getElementById("posterInput").files[0];
+
+    if (!posterInput) {
+        alert("Please upload a poster!");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("genre", genre);
+    formData.append("rating", rating);
+    formData.append("year", year);
+    formData.append("type", typeMovie ? "Movies" : typeSeries ? "Series" : "");
+    formData.append("poster", posterInput);
+
+    try {
+        const response = await fetch("http://localhost:5000/api/movies", {
+            method: "POST",
+            body: formData
+        });
+
+        if (response.ok) {
+            alert("Movie added successfully!");
+            window.location.href = "main-page.html";
+        } else {
+            alert("Failed to add movie.");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred.");
+    }
+});

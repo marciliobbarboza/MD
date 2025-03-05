@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Movie</title>
+    <link rel="stylesheet" href="new-movie.css">
+    <script src="script.js" defer></script>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="MoreOrLess.png">
+            <div class="user-menu">
+                <button id="userButton">
+                    <i class="fas fa-user"></i>
+                    <span id="username" style="font-family: 'Jua', sans-serif; font-size: 1.5em;"></span>
+                </button>
+                <div id="dropdownMenu" class="dropdown">
+                    <a href="#">Profile</a>
+                    <a href="main-page.html" id="createButton" style="display: none;">Genre</a>
+                    <a id="logoutButton" href="#">Logout</a>
+                </div>
+            </div>
+            <a id="loginLink" href="login.html">Login</a>
+            <a id="createAccountLink" href="create-account.html">Create Account</a>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <h1>New Movie <button class="add-btn">Add</button></h1>
+            
+            <form id="movieForm">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="genre">Genre</label>
+                    <input type="text" id="genre" required>
+                </div>
+    
+                <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <input type="number" id="rating" min="1" max="5" required>
+                    </div>
+                <div class="form-group ">
+                        <label for="year">Year</label>
+                        <input type="number" id="year" required>
+                    </div>
+
+                <div class="filters">
+                    <h2 style="font-size: 1.5em;">Types:</h2>
+                    <label ><input type="checkbox"> Movies</label>
+                    <label ><input type="checkbox"> Series</label>
+                </div>
+                
+                <div class="poster-container">
+                        <label for="posterInput"></label>
+                        <label class="poster-upload">
+                            <input type="file" id="posterInput" accept="image/*" hidden>
+                            <span class="plus-icon">Poster</span>
+                        </label>
+                    </div>
+                </div>
+    </main>
+</body>
+</html>
+
+    
