@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+/* General body styling */
+body {
+    background-color: #4B88D7;
+    font-family: 'Jua', sans-serif;
+    color: #F9F6EE;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header navigation */
+header {
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #F9F6EE;
+    font-size: 1.8rem;
+    margin: 0 15px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+    color: #FFE629;
+    transform: scale(1.1);
+}
+
+/* Movie container */
+.movie-container {
+    background-color: transparent;
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Movie title */
+h1 {
+    font-size: 2.5rem;
+    color:#F9F6EE;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+/* Movie poster */
+.poster-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+img {
+    max-width: 300px;
+    border-radius: 10px;
+}
+
+/* Rating section */
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    font-size: 1.5rem;
+    gap: 10px;
+}
+
+.rating #starRating {
+    display: flex;
+    gap: 5px;
+    border-bottom: none; /* Remove qualquer linha */
+    align-items: center;
+}
+
+/* Movie info section */
+.movie-info {
+    font-size: 1.2rem;
+}
+
+.movie-info p {
+    margin: 5px 0;
+    color: #F9F6EE;
+}
+
+/* Star colors */
+.star {
+    font-size: 1.5rem;
+    display: inline-block; /* Evita quebra de linha e possíveis espaçamentos */
+    text-decoration: none; /* Remove qualquer sublinhado */
+    border-bottom: none; /* Garante que não haja linhas inesperadas */
+    margin: 0; /* Remove margens extras */
+    padding: 0; /* Remove espaçamentos internos */
+}
+
+.star:nth-child(1) { color: #E35F53; }  /* Red */
+.star:nth-child(2) { color: #FFE629; } /* Yellow */
+.star:nth-child(3) { color: #2BFF32; } /* Green */
+.star:nth-child(4) { color: #36F9E2; } /* Cyan */
+.star:nth-child(5) { color: #1255FF; } /* Blue */
+.star:nth-child(6) { color: #4B88D7; } /* Dark Blue */
+
+/* Mobile responsiveness */
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .rating {
+        font-size: 1.2rem;
+    }
+
+    .movie-info p {
+        font-size: 1rem;
+    }
+}

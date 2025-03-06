@@ -30,8 +30,14 @@ nav {
 
 nav a {
     text-decoration: none;
-    margin: 0 10px; 
-    font-size: 2rem; 
+    color: #F9F6EE;
+    margin: 0 10px;
+    font-size: 2rem;
+    transition: color 0.3s ease, transform 0.2s ease; /* Smooth transition effect */
+}
+
+nav a:hover { 
+    transform: scale(1.1); /* Slight zoom effect */
 }
 
 main {
@@ -133,16 +139,22 @@ h3 {
 }
 
 .rating {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 5px;
+    display: flex; /* Align stars in a row */
+    justify-content: center; /* Center the stars horizontally */
+    gap: 5px; /* Add spacing between stars */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove padding */
+    line-height: 0; /* Eliminate potential extra height from text */
 }
 
 .star {
-    font-size: 1.3rem;
+    display: inline-block; /* Treat each star as a standalone block */
+    font-size: 1.3rem; /* Adjust size if needed */
+    margin: 0; /* Ensure no extra margins */
+    padding: 0; /* Remove padding */
+    line-height: 1; /* Avoid spacing issues below stars */
+    
 }
-
 .star-1 {
     color:#E35F53;
 }
@@ -180,7 +192,6 @@ h3 {
 #userButton {
     background: none;
     border: none;
-    color: #FFC107;
     font-size: 1.6rem;
     cursor: pointer;
     display: flex;
@@ -250,3 +261,7 @@ h3 {
     display: block;
 }
 
+/* Remove default link styling */
+a {
+    text-decoration: none; /* Removes underline */
+}

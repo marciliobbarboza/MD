@@ -72,7 +72,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const movieCard = document.createElement("div");
             movieCard.classList.add("card");
             movieCard.innerHTML = `
-                <img src="${movie.poster}" alt="${movie.title}">
+                <a href="movie-details.html?id=${movie._id}">
+                <img src="${movie.poster}" alt="${movie.title}" onerror="this.src='placeholder-image.png';">
                 <div class="rating">${generateStars(movie.rating)}</div>
             `;
 
