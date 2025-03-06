@@ -1,10 +1,10 @@
-// Redirecionar para outra página
+
 function redirectTo(page) {
     window.location.href = page;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Exibir o nome do usuário logado, se existir
+    // display the name of the logged in user, if it exists
     const username = localStorage.getItem('username');
     const userButton = document.getElementById('userButton');
     const dropdownMenu = document.getElementById('dropdownMenu');
@@ -19,13 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
         userButton.style.display = 'none';
     }
 
-    // Alternar menu suspenso
+    // toggle dropdown
     if (userButton && dropdownMenu) {
         userButton.addEventListener("click", () => {
             dropdownMenu.classList.toggle("show");
         });
 
-        // Fechar dropdown ao clicar fora
+        // close dropdown when clicking outside
         window.addEventListener("click", (event) => {
             if (!userButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
                 dropdownMenu.classList.remove("show");
@@ -41,35 +41,31 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Checar se o usuário é admin e exibir botões específicos
+    // check if the user is admin and display specific buttons
     const createButton = document.getElementById("createButton");
     if (username && createButton) {
-        try {
-            fetch("http://localhost:5000/api/check-admin", {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                }
-            }).then(response => {
-                if (response.ok) {
-                    document.getElementById('username').style.color = "#1255FF";
-                    createButton.style.display = "block";
-                } else {
-                    document.getElementById('username').style.color = "#FFC107";
-                }
-            }).catch(error => console.error("Error checking admin:", error));
-        } catch (error) {
-            console.error("Error:", error);
-        }
+        fetch("http://localhost:5000/api/check-admin", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        }).then(response => {
+            if (response.ok) {
+                document.getElementById('username').style.color = "#1255FF";
+                createButton.style.display = "block";
+            } else {
+                document.getElementById('username').style.color = "#FFC107";
+            }
+        }).catch(error => console.error("Error checking admin:", error));
     }
 
-    // Carregar filmes e organizar por gêneros
+    // upload movies and organize by genres
     fetch("http://localhost:5000/api/movies").then(async (response) => {
         const movies = await response.json();
         const genreSections = {
             "music": document.querySelector(".genre-section:nth-of-type(1) .carousel"),
             "Action": document.querySelector(".genre-section:nth-of-type(2) .carousel"),
-            "drama": document.querySelector(".genre-section:nth-of-type(3) .carousel")
+            "Drama": document.querySelector(".genre-section:nth-of-type(3) .carousel")
         };
 
         movies.forEach(movie => {
@@ -90,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }).catch(error => console.error("Error fetching movies:", error));
 
-    // Gerar estrelas de acordo com a avaliação
+    // generate stars according to the evaluation
     function generateStars(rating) {
         const starColors = {
             1: "#E35F53",
@@ -113,47 +109,44 @@ document.addEventListener("DOMContentLoaded", () => {
         return stars;
     }
 
-    // Função para o formulário de envio de filmes
+    // Function for the film submission form
     const movieForm = document.getElementById("movieForm");
     if (movieForm) {
         movieForm.addEventListener("submit", async (event) => {
             event.preventDefault();
 
-            const title = document.getElementById("title").value;
-            const genre = document.getElementById("genre").value;
-            const rating = document.getElementById("rating").value;
-            const year = document.getElementById("year").value;
-            const typeMovie = document.getElementById("typeMovie")?.checked;
-            const typeSeries = document.getElementById("typeSeries")?.checked;
-            const posterInput = document.getElementById("posterInput").files[0];
+            const formData = new FormData();
+            formData.append("title", document.getElementById("title").value);
+            formData.append("genre", document.getElementById("genre").value);
+            formData.append("rating", document.getElementById("rating").value);
+            formData.append("year", document.getElementById("year").value);
+            formData.append("type", document.querySelector('input[name="type"]:checked')?.value);
+            formData.append("poster", document.getElementById("posterInput").files[0]);
 
-            if (!posterInput) {
-                alert("Please upload a poster!");
+            if (!localStorage.getItem("token")) {
+                alert("You are not logged in.");
                 return;
             }
-
-            const formData = new FormData();
-            formData.append("title", title);
-            formData.append("genre", genre);
-            formData.append("rating", rating);
-            formData.append("year", year);
-            formData.append("type", typeMovie ? "Movies" : typeSeries ? "Series" : "");
-            formData.append("poster", posterInput);
 
             try {
                 const response = await fetch("http://localhost:5000/api/movies", {
                     method: "POST",
-                    body: formData
+                    headers: {
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    },
+                    body: formData,
                 });
+
                 if (response.ok) {
                     alert("Movie added successfully!");
                     window.location.href = "main-page.html";
                 } else {
-                    alert("Failed to add movie.");
+                    const error = await response.json();
+                    alert(`Error: ${error.message || response.statusText}`);
                 }
             } catch (error) {
-                console.error("Error:", error);
-                alert("An error occurred.");
+                console.error("Error submitting form:", error);
+                alert("An unexpected error occurred.");
             }
         });
     }

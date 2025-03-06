@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Movie = require("../models/moviesTR");
 const protect = require("../middlewares/auth");
-const upload = require("../middlewares/upload");
+const { upload } = require("../middlewares/upload");
 const cloudinary = require("../config/cloudinary");
 const streamifier = require("streamifier");
 const checkAdmin = require("../middlewares/checkAdmin");
@@ -11,22 +11,17 @@ const checkAdmin = require("../middlewares/checkAdmin");
 router.post("/", protect, checkAdmin, upload.single("poster"), async (req, res) => {
     try {
         let { title, genre, rating, year, type } = req.body;
-        //console.log("Received genre:", genre); // To see what is arriving on the server
 
-        if (typeof genre === "string") {
-            genre = JSON.parse(genre);
-        }
-
-        if(!title || !genre || !rating || !year || !type || !req.file ) {
-            return res.status(400).json({ error: "title, genre, rating, year and type are required" });
+        if (!title || !genre || !rating || !year || !type || !req.file) {
+            return res.status(400).json({ error: "All fields (title, genre, rating, year, type, poster) are required." });
         }
 
         if (!["movie", "series"].includes(type)) {
-            return res.status(400).json({ error: "Type must be 'movie' or 'series'" });
+            return res.status(400).json({ error: "Type must be 'movie' or 'series'." });
         }
 
-        if (!Array.isArray(genre)) {
-            return res.status(400).json({ error: "genre must be an array" });
+        if (typeof genre === "string") {
+            genre = genre.split(",").map(g => g.trim());
         }
 
         const streamUpload = (file) => {
@@ -42,17 +37,24 @@ router.post("/", protect, checkAdmin, upload.single("poster"), async (req, res) 
             });
         };
 
-    const result = await streamUpload(req.file); // image url in Cloudinary
+        const result = await streamUpload(req.file); // upload to Cloudinary
 
-        const newMovie = new Movie({ title, genre, rating, year, type, poster: result.secure_url, });
+        const newMovie = new Movie({
+            title,
+            genre,
+            rating,
+            year,
+            type,
+            poster: result.secure_url, // image URL saved in Cloudinary
+        });
+
         await newMovie.save();
 
-        res.status(201).json(newMovie);
+        res.status(201).json({ message: "Movie added successfully!", movie: newMovie });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Error adding movie" });
+        console.error("Error adding movie:", error);
+        res.status(500).json({ error: "Internal server error while adding movie." });
     }
-
 });
 
 
@@ -207,4 +209,16 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+const streamUpload = (file) => {
+    return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream((error, result) => {
+            if (error) {
+                reject(new Error("Cloudinary upload failed")); // Improved error message
+            } else {
+                resolve(result);
+            }
+        });
+        streamifier.createReadStream(file.buffer).pipe(stream);
+    });
+};
 module.exports = router;
