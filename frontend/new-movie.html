@@ -57,13 +57,18 @@
                     <label ><input type="checkbox"> Series</label>
                 </div>
                 
+                
+
                 <div class="poster-container">
-                        <label for="posterInput"></label>
-                        <label class="poster-upload">
-                            <input type="file" id="posterInput" accept="image/*" hidden>
-                            <span class="plus-icon">Poster</span>
-                        </label>
-                    </div>
+                    <label for="posterInput" class="poster-upload">
+                        <span class="plus-icon">Poster</span>
+                        <input type="file" id="posterInput" accept="image/*" hidden>
+                    </label>
+                    
+                </div>
+                <div id="posterPreview" class="poster-preview hidden">
+                    <img id="posterImage" alt="Poster Preview">
+                    <button id="removePosterButton" type="button">Remove</button>
                 </div>
     </main>
 </body>

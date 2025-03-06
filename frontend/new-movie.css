@@ -220,10 +220,49 @@ label {
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
 }
 
 .upload-icon {
     font-size: 2rem;
     color: #FFB732;
+
 }
 
+.hidden {
+    display: none;
+}
+
+.poster-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center; 
+}
+
+.poster-preview img {
+    width: 100%; 
+    height: auto; 
+    max-width: 150px; 
+    max-height: 150px; 
+    object-fit: cover; 
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#removePosterButton {
+    background-color: #FF6B6B;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#removePosterButton:hover {
+    background-color: #FF4C4C;
+}
