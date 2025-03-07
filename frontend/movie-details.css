@@ -19,6 +19,13 @@ header {
     text-align: center;
 }
 
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
 nav a {
     text-decoration: none;
     color: #F9F6EE;
@@ -27,23 +34,76 @@ nav a {
     transition: color 0.3s ease, transform 0.2s ease;
 }
 
-nav a:hover {
-    color: #FFE629;
-    transform: scale(1.1);
+
+/* User menu */
+.user-menu {
+    position: relative;
+    display: inline-block;
+}
+
+#userButton {
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#userButton i {
+    font-size: 1.8rem;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #FFFFFF;
+    color: #4B88D7;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    display: none;
+    padding: 0;
+    min-width: 220px;
+    font-family: 'Jua', sans-serif;
+    overflow: hidden;
+}
+
+.dropdown a, .dropdown button {
+    display: flex;
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #4B88D7;
+    background-color: transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-family: 'Jua'
+}
+
+.dropdown a:hover, .dropdown button:hover {
+    background-color: #F2F2F2;
+    transform: scale(1.05);
+}
+
+.show {
+    display: block;
 }
 
 /* Movie container */
 .movie-container {
     background-color: transparent;
     text-align: center;
-    margin-top: 50px;
+    margin-top: -10px;
 }
 
 /* Movie title */
 h1 {
     font-size: 2.5rem;
-    color:#F9F6EE;
-    padding: 10px 20px;
+    color: #F9F6EE;
+    padding: 10px;
     border-radius: 10px;
     display: inline-block;
 }
@@ -73,48 +133,26 @@ img {
 .rating #starRating {
     display: flex;
     gap: 5px;
-    border-bottom: none; /* Remove qualquer linha */
     align-items: center;
 }
 
 /* Movie info section */
 .movie-info {
     font-size: 1.2rem;
-}
-
-.movie-info p {
-    margin: 5px 0;
     color: #F9F6EE;
+    text-align: left;
+    margin-top: 20px;
+    line-height: 1.5;
 }
 
-/* Star colors */
 .star {
     font-size: 1.5rem;
-    display: inline-block; /* Evita quebra de linha e possíveis espaçamentos */
-    text-decoration: none; /* Remove qualquer sublinhado */
-    border-bottom: none; /* Garante que não haja linhas inesperadas */
-    margin: 0; /* Remove margens extras */
-    padding: 0; /* Remove espaçamentos internos */
+    color: #D9D9D9; /* Default gray */
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
 }
 
-.star:nth-child(1) { color: #E35F53; }  /* Red */
-.star:nth-child(2) { color: #FFE629; } /* Yellow */
-.star:nth-child(3) { color: #2BFF32; } /* Green */
-.star:nth-child(4) { color: #36F9E2; } /* Cyan */
-.star:nth-child(5) { color: #1255FF; } /* Blue */
-.star:nth-child(6) { color: #4B88D7; } /* Dark Blue */
-
-/* Mobile responsiveness */
-@media screen and (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-    }
-
-    .rating {
-        font-size: 1.2rem;
-    }
-
-    .movie-info p {
-        font-size: 1rem;
-    }
+#username {
+    color: #FFE629;
+    font-weight: bold;
 }

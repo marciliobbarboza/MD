@@ -10,10 +10,20 @@
 <body>
     <header>
         <nav>
-            <img src="MoreOrLess.png">
-            <a href="index.html" id="loginLink">Login</a>
-            <a href="create-account.html" id="createAccountLink">Create Account</a>
-            <a href="main-page.html">Genres</a>
+            <img src="MoreOrLess.png" alt="Logo">
+            <div class="user-menu">
+                <button id="userButton" style="display: none;">
+                    <i class="fas fa-user"></i>
+                    <span id="username"></span>
+                </button>
+                <div id="dropdownMenu" class="dropdown">
+                    <a href="#">Profile</a>
+                    <a href="new-movie.html" id="createButton" style="display: none;">Create</a>
+                    <a id="logoutButton" href="#">Logout</a>
+                </div>
+            </div>
+            <a id="loginLink" href="login.html">Login</a>
+            <a id="createAccountLink" href="create-account.html">Create Account</a>
         </nav>
     </header>
     <main>
@@ -22,14 +32,19 @@
             <div class="poster-container">
                 <img id="moviePoster" src="" alt="Movie Poster">
             </div>
+            <div class="rating-container">
+                <h2>Your Rating</h2>
+                <div id="userRating" class="rating"></div>
+                <p id="ratingMessage"></p>
+            </div>
             <div class="rating">
                 <span id="starRating"></span>
                 <p id="reviewCount">(Loading... reviews)</p>
             </div>
             <div class="movie-info">
-                <p><strong>Type:</strong> <span id="movieType">Loading...</span></p>
-                <p><strong>Genres:</strong> <span id="movieGenres">Loading...</span></p>
-                <p><strong>Year:</strong> <span id="movieYear">Loading...</span></p>
+                <p>Type: <span id="movieType">Loading...</span></p>
+                <p>Genres: <span id="movieGenres">Loading...</span></p>
+                <p>Year: <span id="movieYear">Loading...</span></p>
             </div>
         </div>
     </main>

@@ -65,7 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const genreSections = {
             "music": document.querySelector(".genre-section:nth-of-type(1) .carousel"),
             "Action": document.querySelector(".genre-section:nth-of-type(2) .carousel"),
-            "Drama": document.querySelector(".genre-section:nth-of-type(3) .carousel")
+            "Drama": document.querySelector(".genre-section:nth-of-type(3) .carousel"),
+            "Animation": document.querySelector(".genre-section:nth-of-type(4) .carousel")
         };
 
         movies.forEach(movie => {
