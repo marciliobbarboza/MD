@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    // Exibir o nome do usuário logado, se existir
     const username = localStorage.getItem("username");
     const userButton = document.getElementById("userButton");
     const loginLink = document.getElementById("loginLink");
@@ -22,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
         createAccountLink.style.display = "none";
         userButton.style.display = "flex";
 
-        // Verifica se o usuário é admin
         if (createButton) {
             fetch("http://localhost:5000/api/check-admin", {
                 method: "GET",
@@ -32,11 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .then(response => {
                 if (response.ok) {
-                    // Usuário é admin: altera estilo e mostra o botão de criar
                     document.getElementById("username").style.color = "#1255FF";
                     createButton.style.display = "block";
                 } else {
-                    // Não é admin: cor padrão
                     document.getElementById("username").style.color = "#FFC107";
                 }
             })
@@ -46,13 +42,12 @@ document.addEventListener("DOMContentLoaded", () => {
         userButton.style.display = "none";
     }
 
-    // Alternar o menu dropdown ao clicar no botão do usuário
     if (userButton && dropdownMenu) {
         userButton.addEventListener("click", () => {
             dropdownMenu.classList.toggle("show");
         });
 
-        // Fechar o dropdown ao clicar fora dele
+    
         window.addEventListener("click", (event) => {
             if (!userButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
                 dropdownMenu.classList.remove("show");
@@ -63,9 +58,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Logout do usuário
     if (logoutButton) {
         logoutButton.addEventListener("click", () => {
-            localStorage.removeItem("username"); // Remove o nome do usuário
-            localStorage.removeItem("token");   // Remove o token
-            window.location.href = "index.html"; // Redireciona para a página inicial
+            localStorage.removeItem("username"); 
+            localStorage.removeItem("token");   
+            window.location.href = "index.html"; 
         });
     }
 
@@ -73,20 +68,20 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(`http://localhost:5000/api/movies/${movieId}`)
         .then(response => response.json())
         .then(movie => {
-            // Popula os detalhes do filme
+           
             document.getElementById("movieTitle").textContent = movie.title;
             document.getElementById("moviePoster").src = movie.poster;
             document.getElementById("movieType").textContent = movie.type;
             document.getElementById("movieGenres").textContent = movie.genre.join(", ");
             document.getElementById("movieYear").textContent = movie.year;
 
-            // Renderiza as estrelas do rating geral
+           
             const starRating = document.getElementById("starRating");
             const reviewCount = document.getElementById("reviewCount");
             starRating.innerHTML = generateStars(movie.rating);
             reviewCount.textContent = `(${movie.reviews.length} reviews)`;
 
-            // Carrega o rating do usuário
+           
             renderUserRating(movieId, movie.userRating || 0);
         })
         .catch(error => {
@@ -94,9 +89,9 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Falha ao carregar os detalhes do filme.");
         });
 
-    // Gera as estrelas coloridas para o rating geral
+    
     function generateStars(rating) {
-        const starColors = ["#E35F53", "#FFE629", "#2BFF32", "#36F9E2", "#1255FF"]; // Cores específicas para cada estrela
+        const starColors = ["#E35F53", "#FFE629", "#2BFF32", "#36F9E2", "#1255FF"]; 
 
         let stars = "";
         for (let i = 1; i <= 5; i++) {
@@ -109,10 +104,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return stars;
     }
 
-    // Renderiza as estrelas do rating do usuário
+    
     function renderUserRating(movieId, savedRating) {
         const starContainer = document.getElementById("userRating");
-        starContainer.innerHTML = ""; // Limpa as estrelas anteriores
+        starContainer.innerHTML = ""; 
 
         for (let i = 1; i <= 5; i++) {
             const star = document.createElement("span");
@@ -140,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         stars.forEach((star, index) => {
             if (index < starIndex) {
-                star.style.color = starIndex === 5 ? starColors[index] : starColors[starIndex - 1];
+                star.style.color = starColors[index] 
             } else {
                 star.style.color = "#D9D9D9";
             }
@@ -162,7 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const starColors = ["#E35F53", "#FFE629", "#2BFF32", "#36F9E2", "#1255FF"];
 
         if (!localStorage.getItem("username")) {
-            // Redireciona para a página de criação de conta se o usuário não estiver logado
             window.location.href = "create-account.html";
             return;
         }
@@ -197,5 +191,27 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Erro ao salvar o rating:", error);
             document.getElementById("ratingMessage").textContent = "Falha ao salvar o rating.";
         });
+
+        // Genres button redirects and saves changes
+        document.getElementById('genresButton').addEventListener('click', () => {
+            saveChanges(); 
+            window.location.href = 'main-page.html';
+        });
+
+        function saveChanges() {
+            const userRating = document.querySelectorAll('.star.active').length; 
+            const movieId = new URLSearchParams(window.location.search).get('id');
+            if (movieId && userRating) {
+                fetch(`http://localhost:5000/api/movies/${movieId}/save`, {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    },
+                    body: JSON.stringify({ userRating })
+                }).catch(error => console.error('Erro ao salvar alterações:', error));
+            }
+        }
+
     }
 });

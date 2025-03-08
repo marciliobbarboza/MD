@@ -3,7 +3,7 @@
 /* General body styling */
 body {
     background-color: #4B88D7;
-    font-family: 'Jua', sans-serif;
+    font-family: 'Jua';
     color: #F9F6EE;
     margin: 0;
     padding: 0;
@@ -25,6 +25,7 @@ nav {
     align-items: center;
     gap: 15px;
 }
+
 
 nav a {
     text-decoration: none;
@@ -58,7 +59,7 @@ nav a {
 .dropdown {
     position: absolute;
     top: 100%;
-    right: 0;
+    left: 0;
     background-color: #FFFFFF;
     color: #4B88D7;
     border-radius: 12px;
@@ -68,6 +69,7 @@ nav a {
     min-width: 220px;
     font-family: 'Jua', sans-serif;
     overflow: hidden;
+    text-align: left
 }
 
 .dropdown a, .dropdown button {
@@ -152,7 +154,28 @@ img {
     transition: color 0.2s ease-in-out;
 }
 
+
 #username {
-    color: #FFE629;
     font-weight: bold;
+    font-family: 'Jua';
+    font-size: 3rem;
+    margin-top: 15px; 
+    left: -22px; /* Move para a esquerda */
+
+    
+}
+
+#genresButton {
+    font-family: 'Jua';
+    font-size: 3rem; 
+    color: #F9F6EE;
+    padding: 10px 20px; 
+    cursor: pointer; 
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    margin-top: 15px; 
+}
+
+#genresButton:hover {
+    color: #FFD700; 
+    transform: scale(1.1); 
 }

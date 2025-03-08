@@ -90,23 +90,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // generate stars according to the evaluation
     function generateStars(rating) {
-        const starColors = {
-            1: "#E35F53",
-            2: "#FFE629",
-            3: "#2BFF32",
-            4: "#36F9E2",
-            5: ["#E35F53", "#FFE629", "#2BFF32", "#36F9E2", "#1255FF"]
-        };
+        const starColors = ["#E35F53", "#FFE629", "#2BFF32", "#36F9E2", "#1255FF"]; 
 
         let stars = "";
-        if (rating < 5) {
-            for (let i = 0; i < rating; i++) {
-                stars += `<span class="star star-${rating}">&#9733;</span>`;
-            }
-        } else {
-            for (let i = 0; i < 5; i++) {
-                stars += `<span class="star" style="color: ${starColors[5][i]}">&#9733;</span>`;
-            }
+        for (let i = 1; i <= 5; i++) {
+            if (i <= Math.floor(rating)) {
+                stars += `<span class="star" style="color: ${starColors[i - 1]}">&#9733;</span>`;
+            } 
         }
         return stars;
     }
