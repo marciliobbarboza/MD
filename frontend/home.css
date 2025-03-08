@@ -49,6 +49,7 @@ nav a:hover {
 .carousel {
     width: 800px;
     overflow: hidden;
+    position: relative;
 }
 
 .carousel-inner {
@@ -56,6 +57,8 @@ nav a:hover {
     gap: 10px;
     justify-content: center;
     padding: 5px;
+    transition: transform 1.5s ease-in-out;
+    will-change: transform;
 }
 
 .movie-card {
@@ -65,39 +68,18 @@ nav a:hover {
     background-position: center;
     border-radius: 10px;
     overflow: hidden;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, opacity 0.5s ease;
+    opacity: 1;
 }
 
-.movie-card:hover {
-    transform: scale(1.05);
+.movie-card.slide {
+    animation: slideIn 0.5s ease forwards;
 }
 
-.carousel-button {
-    width: 60px;
-    height: 90px;
-    font-size: 3.5rem;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    background-color: #4B88D7; 
-    color: #F9F6EE; 
-    display: flex;
-    align-items: center;
-    justify-content: center
-}
 
-.carousel-button:hover {
-    transform: scale(1.1);
-   
-}
-#prevButton::before {
-    content: "<";
-    font-weight: bold;
-}
-
-#nextButton::before {
-    content: ">"; 
-    font-weight: bold;
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
 }
 
 .footer-text {

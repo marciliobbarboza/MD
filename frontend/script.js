@@ -4,9 +4,6 @@ function redirectTo(page) {
 }
 document.addEventListener("DOMContentLoaded", async () => {
     const carouselInner = document.getElementById("carouselInner");
-    const prevButton = document.getElementById("prevButton");
-    const nextButton = document.getElementById("nextButton");
-
     let currentIndex = 0;
     let movies = [];
 
@@ -30,24 +27,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             const movieCard = document.createElement("div");
             movieCard.classList.add("movie-card");
             movieCard.style.backgroundImage = `url('${movie.poster}')`;
-    
-            console.log(`Adicionando pôster: ${movie.poster}`); 
-    
             carouselInner.appendChild(movieCard);
+            movieCard.classList.add("slide"); 
         }
     }
 
-    prevButton.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + movies.length) % movies.length;
+    function autoScrollCarousel() {
+        currentIndex = (currentIndex + 1) % movies.length; 
         renderCarousel();
-    });
-
-    nextButton.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % movies.length;
-        renderCarousel();
-    });
+    }
 
     renderCarousel();
+
+    setInterval(autoScrollCarousel, 3000);
 });
 
 

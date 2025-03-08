@@ -49,8 +49,8 @@ input {
 }
 
 .filters h2 {
-    margin: 0; /* Remove margem extra do título */
-    font-size: 1.5rem; /* Ajusta o tamanho do texto para consistência */
+    margin: 0; 
+    font-size: 1.5rem; 
 }
 
 .filters label {
