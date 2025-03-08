@@ -2,6 +2,54 @@
 function redirectTo(page) {
     window.location.href = page;
 }
+document.addEventListener("DOMContentLoaded", async () => {
+    const carouselInner = document.getElementById("carouselInner");
+    const prevButton = document.getElementById("prevButton");
+    const nextButton = document.getElementById("nextButton");
+
+    let currentIndex = 0;
+    let movies = [];
+
+    try {
+        const response = await fetch("http://localhost:5000/api/movies");
+        movies = await response.json(); 
+        console.log("Filmes carregados:", movies); 
+    } catch (error) {
+        console.error("Erro ao carregar filmes:", error);
+        return;
+    }
+
+    function renderCarousel() {
+        carouselInner.innerHTML = ""; 
+        for (let i = 0; i < 4; i++) { 
+            const index = (currentIndex + i) % movies.length;
+            const movie = movies[index];
+    
+            if (!movie || !movie.poster) continue; 
+    
+            const movieCard = document.createElement("div");
+            movieCard.classList.add("movie-card");
+            movieCard.style.backgroundImage = `url('${movie.poster}')`;
+    
+            console.log(`Adicionando pôster: ${movie.poster}`); 
+    
+            carouselInner.appendChild(movieCard);
+        }
+    }
+
+    prevButton.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + movies.length) % movies.length;
+        renderCarousel();
+    });
+
+    nextButton.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % movies.length;
+        renderCarousel();
+    });
+
+    renderCarousel();
+});
+
 
 document.addEventListener("DOMContentLoaded", () => {
     // display the name of the logged in user, if it exists

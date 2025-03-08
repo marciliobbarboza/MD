@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
     <link rel="stylesheet" href="home.css">
+    <script src="script.js"></script>
 </head>
 <body>
 
-    
     <img src="MoreOrLess.png">
 
     <nav>
@@ -21,13 +21,13 @@
         "To infinity... And beyond!"
     </div>
 
-    <div class="carousel">
-        <span class="arrow">&#10094;</span>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <span class="arrow">&#10095;</span>
+    <div class="carousel-container">
+        <button id="prevButton" class="carousel-button"></button>
+        <div class="carousel">
+            <div id="carouselInner" class="carousel-inner">
+            </div>
+        </div>
+        <button id="nextButton" class="carousel-button"></button>
     </div>
 
     <footer>

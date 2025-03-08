@@ -7,19 +7,20 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 nav, .quote, .carousel, footer {
-    margin: 40px 0;
+    margin: 20px 0;
 }
 
 nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
-    padding: 15px;
-    font-size: 2.8rem;
+    gap: 20px;
+    padding: 10px;
+    font-size: 1.5rem;
 }
 
 nav a {
@@ -29,41 +30,78 @@ nav a {
 }
 
 nav a:hover {
-    color: #FFD700; 
-    transform: scale(1.1); 
+    color: #FFD700;
+    transform: scale(1.1);
 }
 
-
 .quote {
-    font-size: 1.7rem;
-    margin: 90px 0;
+    font-size: 1.2rem;
+    margin: 30px 0;
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
 }
 
 .carousel {
+    width: 800px;
+    overflow: hidden;
+}
+
+.carousel-inner {
     display: flex;
+    gap: 10px;
     justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin: 0px 0;
+    padding: 5px;
 }
 
-.card {
-    width: 200px;  
-    height: 300px;  
-    background-color: #D9D9D9;
+.movie-card {
+    width: 200px;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
     border-radius: 10px;
-    margin: 10px;  
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
 }
 
+.movie-card:hover {
+    transform: scale(1.05);
+}
 
-.arrow {
-    font-size: 2rem;
+.carousel-button {
+    width: 60px;
+    height: 90px;
+    font-size: 3.5rem;
+    border: none;
     cursor: pointer;
+    transition: transform 0.2s ease;
+    background-color: #4B88D7; 
+    color: #F9F6EE; 
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.carousel-button:hover {
+    transform: scale(1.1);
+   
+}
+#prevButton::before {
+    content: "<";
+    font-weight: bold;
+}
+
+#nextButton::before {
+    content: ">"; 
+    font-weight: bold;
 }
 
 .footer-text {
-    font-size: 0.8rem;
-    margin-top: 130px;
+    font-size: 0.7rem;
+    margin-top: 30px;
     opacity: 0.8;
 }
-

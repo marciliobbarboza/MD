@@ -12,45 +12,49 @@ body {
 nav {
     display: flex;
     justify-content: center;
-    padding: 30px; 
+    padding: 20px; 
+    gap: 40px;
 }
 
 .container {
-    margin-top: 80px; 
+    margin-top: 5px; 
+    padding: 20px;
 }
 
 h2 {
-    font-size: 3.5rem; 
+    font-size: 3rem; 
+    margin-bottom: 30px;
 }
 
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px; 
+    gap: 25px; 
 }
 
 label {
-    font-size: 1.8rem; 
+    font-size: 1.6rem; 
 }
 
 input {
-    width: 300px; 
-    padding: 12px;
+    width: 320px; 
+    padding: 14px;
     border-radius: 20px;
     border: none;
     font-size: 1.2rem; 
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .buttons {
-    margin-top: 25px; 
+    margin-top: 30px; 
     display: flex;
-    gap: 20px; 
+    gap: 25px; 
 }
 
 button {
     border: none;
-    padding: 15px 30px; 
+    padding: 15px 35px; 
     border-radius: 20px;
     font-size: 1.6rem; 
     cursor: pointer;
