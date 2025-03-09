@@ -45,12 +45,9 @@ main {
 }
 
 h3 {
-    font-size: 2em;
+    font-size: 2.5em;
 }
 
-h2 { /* Genres Music,Action,... */
-    font-size: 2.3em;
-}
 
 .filters {
     display: flex;

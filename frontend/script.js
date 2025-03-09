@@ -106,12 +106,14 @@ document.addEventListener("DOMContentLoaded", () => {
             "music": document.querySelector(".genre-section:nth-of-type(1) .carousel"),
             "Action": document.querySelector(".genre-section:nth-of-type(2) .carousel"),
             "Drama": document.querySelector(".genre-section:nth-of-type(3) .carousel"),
-            "Animation": document.querySelector(".genre-section:nth-of-type(4) .carousel")
+            "Animation": document.querySelector(".genre-section:nth-of-type(4) .carousel"),
+            "Comedy": document.querySelector(".genre-section:nth-of-type(5) .carousel")
         };
 
         movies.forEach(movie => {
             const movieCard = document.createElement("div");
             movieCard.classList.add("card");
+            movieCard.setAttribute("data-type", movie.type);
             movieCard.innerHTML = `
                 <a href="movie-details.html?id=${movie._id}">
                 <img src="${movie.poster}" alt="${movie.title}" onerror="this.src='placeholder-image.png';">
@@ -210,4 +212,70 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         console.error("Poster elements are missing in the DOM.");
     }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const filterMovies = document.getElementById("filterMovies");
+    const filterSeries = document.getElementById("filterSeries");
+    const genreSections = document.querySelectorAll(".genre-section");
+
+    filterMovies.checked = false;
+    filterSeries.checked = false;
+
+    function updateFilters() {
+        genreSections.forEach((section) => {
+            const movieCards = section.querySelectorAll(".card[data-type='movie']");
+            const seriesCards = section.querySelectorAll(".card[data-type='series']");
+
+            let hasVisibleMovies = false;
+            let hasVisibleSeries = false;
+
+            if (filterMovies.checked && !filterSeries.checked) {
+                // show only movies
+                movieCards.forEach((card) => {
+                    card.style.display = "block";
+                    hasVisibleMovies = true;
+                });
+                seriesCards.forEach((card) => (card.style.display = "none"));
+            } else if (!filterMovies.checked && filterSeries.checked) {
+                // show only series
+                movieCards.forEach((card) => (card.style.display = "none"));
+                seriesCards.forEach((card) => {
+                    card.style.display = "block";
+                    hasVisibleSeries = true;
+                });
+            } else if (filterMovies.checked && filterSeries.checked) {
+                // show movies and series
+                movieCards.forEach((card) => {
+                    card.style.display = "block";
+                    hasVisibleMovies = true;
+                });
+                seriesCards.forEach((card) => {
+                    card.style.display = "block";
+                    hasVisibleSeries = true;
+                });
+            } else {
+                // no filters applied, everything returns to original state
+                movieCards.forEach((card) => {
+                    card.style.display = "block";
+                    hasVisibleMovies = true;
+                });
+                seriesCards.forEach((card) => {
+                    card.style.display = "block";
+                    hasVisibleSeries = true;
+                });
+            }
+
+            // hide genre section if no visible movies or series
+            if (!hasVisibleMovies && !hasVisibleSeries) {
+                section.style.display = "none"; // hide section
+            } else {
+                section.style.display = "block"; // show section
+            }
+        });
+    }
+
+    // executes the changes in the checkboxes
+    filterMovies.addEventListener("change", updateFilters);
+    filterSeries.addEventListener("change", updateFilters);
 });
