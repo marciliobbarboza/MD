@@ -2,11 +2,17 @@
 
 body {
     background-color: #4B88D7;
-    font-family: 'Jua', sans-serif;
+    font-family: 'Jua';
     color: #F9F6EE;
     text-align: center;
     margin: 0;
     padding: 0;
+}
+
+img[src="MoreOrLess.png"] {
+    max-width: 400px; 
+    height: auto; 
+    transition: all 0.3s ease; 
 }
 
 nav {
@@ -14,10 +20,11 @@ nav {
     justify-content: center;
     padding: 20px; 
     gap: 40px;
+    flex-wrap: wrap;
 }
 
 .container {
-    margin-top: 5px; 
+    margin-top: 0px; 
     padding: 20px;
 }
 
@@ -49,10 +56,15 @@ input {
 .buttons {
     margin-top: 30px; 
     display: flex;
-    gap: 25px; 
+    flex-wrap: wrap; 
+    gap: 15px; 
+    justify-content: center;
+    margin: 10px
 }
 
 button {
+    flex: 1 1 auto; 
+    max-width: 100%;
     border: none;
     padding: 15px 35px; 
     border-radius: 20px;
@@ -81,3 +93,47 @@ button:hover {
     background-color: #E74C3C;
     color: white;
 }
+
+/* Responsive Queries */
+@media (max-width: 1024px) {
+    .carousel { width: 100%; } 
+    .movie-card { width: 150px; height: 225px; }
+    nav { font-size: 1rem; gap: 10px; flex-wrap: wrap; } 
+}
+
+@media (max-width: 768px) {
+    h2 { font-size: 1.8rem; margin-bottom: 15px; }
+    input { width: 95%; padding: 10px; }
+    .buttons { flex-direction: column; gap: 8px; }
+    button { font-size: 1.2rem; padding: 10px; width: 100%; }
+    img[src="MoreOrLess.png"] { max-width: 200px; }
+    nav { gap: 15px; flex-wrap: wrap; font-size: 0.9rem; }
+}
+
+@media (max-width: 480px) {
+    h2 { font-size: 1.6rem; margin-bottom: 10px; }
+    input { width: 90%; padding: 8px; font-size: 1rem; }
+    .buttons { gap: 5px; }
+    button { font-size: 1rem; padding: 8px; width: 95%; }
+    img[src="MoreOrLess.png"] { max-width: 150px; }
+    nav { gap: 10px; font-size: 0.8rem; flex-wrap: wrap; }
+}
+
+@media (max-height: 600px) {
+    h2 { font-size: 1.5rem; margin-bottom: 10px; }
+    input { padding: 8px; font-size: 1rem; }
+    .buttons { gap: 5px; }
+    button { font-size: 1rem; padding: 8px; }
+    img[src="MoreOrLess.png"] { max-width: 100px; }
+    nav { gap: 8px; flex-wrap: wrap; font-size: 0.7rem; }
+}
+
+@media (max-width: 480px) and (max-height: 600px) {
+    h2 { font-size: 1.4rem; margin-bottom: 8px; }
+    input { padding: 6px; font-size: 0.9rem; }
+    button { font-size: 0.9rem; padding: 6px; }
+    .buttons { gap: 4px; }
+    img[src="MoreOrLess.png"] { max-width: 90px; }
+    nav { gap: 6px; font-size: 0.7rem; flex-direction: column; }
+}
+

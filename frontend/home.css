@@ -2,7 +2,7 @@
 
 body {
     background-color: #4B88D7;
-    font-family: 'Jua', sans-serif;
+    font-family: 'Jua';
     color: #F9F6EE;
     text-align: center;
     margin: 0;
@@ -21,6 +21,13 @@ nav {
     gap: 20px;
     padding: 10px;
     font-size: 1.5rem;
+    flex-wrap: wrap; 
+}
+
+img[src="MoreOrLess.png"] {
+    max-width: 500px; 
+    height: auto; 
+    transition: all 0.3s ease; 
 }
 
 nav a {
@@ -47,7 +54,7 @@ nav a:hover {
 }
 
 .carousel {
-    width: 800px;
+    width: 800px; 
     overflow: hidden;
     position: relative;
 }
@@ -76,7 +83,6 @@ nav a:hover {
     animation: slideIn 0.5s ease forwards;
 }
 
-
 @keyframes slideIn {
     from { transform: translateX(100%); }
     to { transform: translateX(0); }
@@ -86,4 +92,50 @@ nav a:hover {
     font-size: 0.7rem;
     margin-top: 30px;
     opacity: 0.8;
+}
+
+/* Responsive Queries */
+@media (max-width: 1024px) {
+    h1 { font-size: 2rem; }
+    nav { gap: 10px; font-size: 1rem; flex-wrap: wrap; }
+    img[src="MoreOrLess.png"], #moviePoster { max-width: 300px; max-height: 400px; }
+    .movie-container { margin-top: 10px; }
+    .movie-info, .dropdown a, .dropdown button { font-size: 1rem; padding: 10px 15px; }
+    #genresButton, #username { font-size: 2.5rem; }
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 1.8rem; }
+    nav { gap: 8px; font-size: 0.9rem; flex-wrap: wrap; }
+    img[src="MoreOrLess.png"], #moviePoster { max-width: 250px; max-height: 300px; }
+    .movie-container { margin-top: 5px; }
+    .movie-info, .dropdown a, .dropdown button { font-size: 0.9rem; padding: 8px 12px; }
+    #genresButton, #username { font-size: 2rem; }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 1.5rem; }
+    nav { gap: 5px; font-size: 0.8rem; flex-direction: column; }
+    img[src="MoreOrLess.png"], #moviePoster { max-width: 200px; max-height: 250px; }
+    .movie-container { margin-top: 0; }
+    .movie-info, .dropdown a, .dropdown button { font-size: 0.8rem; padding: 6px 10px; }
+    #genresButton, #username { font-size: 1.8rem; }
+}
+
+@media (max-height: 600px) {
+    h1 { font-size: 1.2rem; }
+    nav { gap: 5px; font-size: 0.7rem; }
+    img[src="MoreOrLess.png"], #moviePoster { max-width: 150px; max-height: 200px; }
+    .movie-container { margin-top: 0; }
+    .movie-info, .dropdown a, .dropdown button { font-size: 0.7rem; padding: 5px 8px; }
+    #genresButton, #username { font-size: 1.5rem; }
+}
+
+@media (max-width: 480px) and (max-height: 600px) {
+    h1 { font-size: 1rem; }
+    nav { gap: 4px; font-size: 0.6rem; flex-direction: column; }
+    img[src="MoreOrLess.png"], #moviePoster { max-width: 120px; max-height: 150px; }
+    .movie-container { margin-top: 0; }
+    .movie-info, .dropdown a, .dropdown button { font-size: 0.6rem; padding: 4px 6px; }
+    #genresButton, #username { font-size: 1.2rem; }
 }
