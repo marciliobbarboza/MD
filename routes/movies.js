@@ -80,6 +80,31 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/user/reviews", protect, async (req, res) => {
+    try {
+        const userId = req.userId; 
+
+        // filter movies that have user ratings
+        const movies = await Movie.find({
+            "reviews.userId": userId
+        });
+
+        // maps relevant data for display
+        const userReviews = movies.map((movie) => {
+            const userReview = movie.reviews.find((review) => review.userId.toString() === userId);
+            return {
+                title: movie.title,
+                poster: movie.poster,
+                rating: userReview.rating
+            };
+        });
+
+        res.json(userReviews);
+    } catch (error) {
+        console.error("Error fetching user reviews:", error);
+        res.status(500).json({ error: "Error fetching reviews." });
+    }
+});
 
 
 // Update a movie by ID

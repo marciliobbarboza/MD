@@ -196,7 +196,6 @@ label {
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    /* Ajustei para subir o botão do poster */
 }
 
 .poster-container {

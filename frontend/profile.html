@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="profile.css">
+    <script src="profile.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="MoreOrLess.png" alt="Logo">
+            <div class="user-menu">
+            <button id="userButton">
+                <i class="fas fa-user"></i>
+                <span id="username"  style="font-family: 'Jua'; font-size: 1.5em;"></span>
+            </button>
+            <div id="dropdownMenu" class="dropdown">
+                <a href="main-page.html">Genres</a>
+                <a href="new-movie.html" id="createButton" style="display: none;">Create</a>
+                <a href="#" id="logoutButton">Logout</a>
+            </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Your Rated Movies & Series</h1>
+        <div class="filters">
+            <label>
+                <input type="checkbox" id="filterMovies"> Movies
+            </label>
+            <label>
+                <input type="checkbox" id="filterSeries"> Series
+            </label>
+        </div>
+        <section class="content-section" id="ratedMoviesSection">
+            <h2>Rated Movies</h2>
+            <div class="content-grid"></div>
+        </section>
+        <section class="content-section" id="ratedSeriesSection">
+            <h2>Rated Series</h2>
+            <div class="content-grid"></div>
+        </section>
+        <p id="noRatingsMessage" style="display: none;">You haven't rated anything yet!</p>
+    </main>
+</body>
+</html>

@@ -3,6 +3,7 @@ const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const protect = require("../middlewares/auth");
+const Movie = require("../models/moviesTR");
 
 const router = express.Router();
 
@@ -82,5 +83,35 @@ router.post(
     }
   }
 );
+
+// Route to fetch user reviews
+router.get("/reviews", protect, async (req, res) => {
+  try {
+      const userId = req.userId; // get the ID of the user logged in by the middleware
+
+      const movies = await Movie.find({ "reviews.userId": userId });
+
+      if (movies.length === 0) {
+          return res.json([]); // returns empty if there are no reviews
+      }
+      
+      const userReviews = movies.map((movie) => {
+          const userReview = movie.reviews.find((review) => review.userId.toString() === userId);
+          return {
+              movieId: movie._id,
+              title: movie.title,
+              poster: movie.poster,
+              rating: userReview.rating,
+              type: movie.type,
+          };
+      });
+
+      res.json(userReviews);
+  } catch (error) {
+      console.error("Error fetching user reviews:", error);
+      res.status(500).json({ error: "Error fetching reviews." });
+  }
+});
+
 
 module.exports = router;
