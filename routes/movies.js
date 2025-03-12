@@ -57,28 +57,35 @@ router.post("/", protect, checkAdmin, upload.single("poster"), async (req, res) 
     }
 });
 
-
-// Route to list all movies
+// Route to list movies (with search functionality)
 router.get("/", async (req, res) => {
     try {
-        const { genre, type } = req.query; //getting parameters from URL
-
-        let filter = {};
+        const { genre, type, search } = req.query; 
+        let filter = {}; // empty initial filter
 
         if (genre) {
             filter.genre = { $in: genre.split(',') };
         }
 
+       // Add filter for type (movie or series)
         if (type) {
-            filter.type = type; // filter by "movie" or "series"
+            filter.type = type;
         }
 
-        const movies = await Movie.find(filter);
+        // add filter for search if "search" parameter is sent and is not empty
+        if (search && search.trim()) {
+            const regex = new RegExp(search.trim(), "i"); // regular expression for case insensitive search
+            filter.title = regex;
+        }
+
+        const movies = await Movie.find(filter).select("title year genre poster rating");
         res.json(movies);
     } catch (error) {
-        res.status(500).json({ error: "Error when searching for movies and series" });
+        console.error("Error fetching movies:", error);
+        res.status(500).json({ error: "Error fetching movies." });
     }
 });
+
 
 router.get("/user/reviews", protect, async (req, res) => {
     try {

@@ -279,3 +279,55 @@ document.addEventListener("DOMContentLoaded", () => {
     filterMovies.addEventListener("change", updateFilters);
     filterSeries.addEventListener("change", updateFilters);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("searchInput");
+    const searchDropdown = document.getElementById("searchDropdown");
+
+    searchInput.addEventListener("input", async () => {
+        const query = searchInput.value.trim();
+        searchDropdown.innerHTML = ""; 
+
+        if (!query) {
+            searchDropdown.classList.add("hidden");
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:5000/api/movies?search=${encodeURIComponent(query)}`);
+            const movies = await response.json();
+
+            if (!movies.length) {
+                searchDropdown.innerHTML = `<div class="dropdown-item">No results found</div>`;
+            } else {
+                movies.forEach((movie) => {
+                    const item = document.createElement("div");
+                    item.classList.add("dropdown-item");
+                    item.innerHTML = `
+                        <img src="${movie.poster || 'placeholder-poster.jpg'}" alt="${movie.title}">
+                        <div class="details">
+                            <div class="title">${movie.title}</div>
+                            <div class="meta">${movie.year} | ${movie.genre.join(", ")}</div>
+                        </div>
+                    `;
+                    item.addEventListener("click", () => {
+                        window.location.href = `movie-details.html?id=${movie._id}`;
+                    });
+                    searchDropdown.appendChild(item);
+                });
+            }
+            searchDropdown.classList.add("active");
+        } catch (error) {
+            console.error("Error fetching search results:", error);
+            searchDropdown.classList.remove("active"); // hide dropdown on error
+        }
+    });
+
+    // close dropdown on click outside
+    window.addEventListener("click", (event) => {
+        if (!searchDropdown.contains(event.target) && !searchInput.contains(event.target)) {
+            searchDropdown.classList.add("hidden");
+        }
+    });
+});
+
