@@ -100,6 +100,7 @@ function renderContent(ratings, section, type) {
             const card = document.createElement("div");
             card.classList.add("card");
             card.innerHTML = `
+                <a href="movie-details.html?id=${rating.movieId}">
                 <img src="${rating.poster}" alt="${rating.title}">
                 <div class="rating">${generateStars(rating.rating)}</div>
             `;

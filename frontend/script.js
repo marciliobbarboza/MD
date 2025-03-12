@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
         const response = await fetch("http://localhost:5000/api/movies");
         movies = await response.json(); 
-        console.log("Filmes carregados:", movies); 
+        console.log("uploaded movies:", movies); 
     } catch (error) {
-        console.error("Erro ao carregar filmes:", error);
+        console.error("error loading movies:", error);
         return;
     }
 

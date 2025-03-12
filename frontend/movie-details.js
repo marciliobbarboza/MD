@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
                     },
                     body: JSON.stringify({ userRating })
-                }).catch(error => console.error('Erro ao salvar alterações:', error));
+                }).catch(error => console.error('error saving changes:', error));
             }
         }
 
