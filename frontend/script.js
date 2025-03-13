@@ -42,7 +42,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     setInterval(autoScrollCarousel, 3000);
 });
 
-
 document.addEventListener("DOMContentLoaded", () => {
     // display the name of the logged in user, if it exists
     const username = localStorage.getItem('username');
@@ -298,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const movies = await response.json();
 
             if (!movies.length) {
-                searchDropdown.innerHTML = `<div class="dropdown-item">No results found</div>`;
+                searchDropdown.innerHTML = `<div class="dropdown-item"></div>`;
             } else {
                 movies.forEach((movie) => {
                     const item = document.createElement("div");
@@ -331,3 +330,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+function togglePassword() {
+    const passwordField = document.getElementById('password');
+    const type = passwordField.type === 'password' ? 'text' : 'password';
+    passwordField.type = type;
+}

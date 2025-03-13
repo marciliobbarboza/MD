@@ -15,12 +15,11 @@ As a user, you rate and view ratings from other platform members and receive per
 ## 🛠️ Technologies Used
 
 ### **Frontend**
--  Python + Flask 🐍
-- TailwindCSS 🎨
+-  Html + Js 🐍
 - Vercel (Hosting) ☁️
 
 ### **Backend**
-- React.js + Vite ⚛️
+- js + Vite ⚛️
 - Railway (Hosting) 🚆
 
 ### **Database**
@@ -28,10 +27,6 @@ As a user, you rate and view ratings from other platform members and receive per
 
 ### **Image Storage**
 - Cloudinary (Free Plan) 📷
-
-### **AI for Recommendations**
-- Python + Flask 🤖
-  
 
 ---
 

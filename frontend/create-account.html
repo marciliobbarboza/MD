@@ -16,13 +16,16 @@
         <h2>Create account</h2>
         <form id="createAccountForm">
             <label for="name">name</label>
-            <input type="text" id="name" required>
+            <input type="text" id="name" maxlength="16"required>
             
             <label for="email">email</label>
             <input type="email" id="email" required>
             
             <label for="password">password</label>
-            <input type="password" id="password" required>
+            <div style="position: relative;">
+                <input type="password" id="password" required>
+                <span class="eye-icon" onclick="togglePassword()"></span> 
+            </div>
             
             <div class="buttons">
                 <button type="submit" class="login-btn">Login</button>

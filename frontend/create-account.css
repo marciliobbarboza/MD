@@ -43,6 +43,23 @@ label {
     font-size: 1.4rem; 
 }
 
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"%3E%3Ccircle cx="12" cy="12" r="3"%3E%3C/circle%3E%3Cpath d="M1 12s3-6 11-6 11 6 11 6-3 6-11 6-11-6-11-6Z"%3E%3C/path%3E%3C/svg%3E') no-repeat center;
+    background-size: 16px;
+}
+
+/* Estilo para o campo de senha */
+.password-wrapper {
+    position: relative;
+}
+
 input {
     width: 300px; 
     padding: 12px; 
