@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let movies = [];
 
     try {
-        const response = await fetch("http://localhost:5000/api/movies");
+        const response = await fetch("https://capstoneproject-production-913d.up.railway.app/api/movies");
         movies = await response.json(); 
         console.log("uploaded movies:", movies); 
     } catch (error) {
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // check if the user is admin and display specific buttons
     const createButton = document.getElementById("createButton");
     if (username && createButton) {
-        fetch("http://localhost:5000/api/check-admin", {
+        fetch("https://capstoneproject-production-913d.up.railway.app/api/check-admin", {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // upload movies and organize by genres
-    fetch("http://localhost:5000/api/movies").then(async (response) => {
+    fetch("https://capstoneproject-production-913d.up.railway.app/api/movies").then(async (response) => {
         const movies = await response.json();
         const genreSections = {
             "music": document.querySelector(".genre-section:nth-of-type(1) .carousel"),
@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             try {
-                const response = await fetch("http://localhost:5000/api/movies", {
+                const response = await fetch("https://capstoneproject-production-913d.up.railway.app/api/movies", {
                     method: "POST",
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -293,7 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/api/movies?search=${encodeURIComponent(query)}`);
+            const response = await fetch(`https://capstoneproject-production-913d.up.railway.app/api/movies?search=${encodeURIComponent(query)}`);
             const movies = await response.json();
 
             if (!movies.length) {

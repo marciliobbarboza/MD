@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         userButton.style.display = "flex";
 
         if (createButton) {
-            fetch("http://localhost:5000/api/check-admin", {
+            fetch("https://capstoneproject-production-913d.up.railway.app/api/check-admin", {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Fetch movie details from API
-    fetch(`http://localhost:5000/api/movies/${movieId}`)
+    fetch(`https://capstoneproject-production-913d.up.railway.app/api/movies/${movieId}`)
         .then(response => response.json())
         .then(movie => {
            
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
             star.classList.toggle("active", index < starIndex);
         });
 
-        fetch(`http://localhost:5000/api/movies/${movieId}/review`, {
+        fetch(`https://capstoneproject-production-913d.up.railway.app/api/movies/${movieId}/review`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => {
             console.error("Erro ao salvar o rating:", error);
-            document.getElementById("ratingMessage").textContent = "Falha ao salvar o rating.";
+            document.getElementById("ratingMessage").textContent = "error saving rate.";
         });
 
         // Genres button redirects and saves changes
@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const userRating = document.querySelectorAll('.star.active').length; 
             const movieId = new URLSearchParams(window.location.search).get('id');
             if (movieId && userRating) {
-                fetch(`http://localhost:5000/api/movies/${movieId}/save`, {
+                fetch(`https://capstoneproject-production-913d.up.railway.app/api/movies/${movieId}/save`, {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
