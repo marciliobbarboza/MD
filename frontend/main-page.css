@@ -139,7 +139,7 @@ h3 {
     color: #999999 ;
 }
 
-.filters {
+ /* .filters {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -181,7 +181,7 @@ h3 {
     font-size: 14px;
     font-weight: bold;
 }
-
+*/
 .genre-section {
     margin-bottom: 80px; 
 }

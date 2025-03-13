@@ -48,7 +48,8 @@
                 if (response.ok) {
                     alert('Account created successfully!');
                     localStorage.setItem('username', name); // Store the username
-                    window.location.href = 'main-page.html'; // Redirect to main page
+                    window.location.href = 'login.html';
+
                 } else {
                     alert(result.error || 'Error creating account');
                 }
