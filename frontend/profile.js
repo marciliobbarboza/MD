@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Check if the user is admin
         try {
-            const response = await fetch("https://capstoneproject-production-913d.up.railway.app/api/check-admin", {
+            const response = await fetch("https://moreorless.up.railway.app/api/check-admin", {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // Load user-rated content
     try {
-        const response = await fetch("https://capstoneproject-production-913d.up.railway.app/api/auth/reviews", {
+        const response = await fetch("https://moreorless.up.railway.app/api/auth/reviews", {
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         });
 

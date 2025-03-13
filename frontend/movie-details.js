@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         userButton.style.display = "flex";
 
         if (createButton) {
-            fetch("https://capstoneproject-production-913d.up.railway.app/api/check-admin", {
+            fetch("https://moreorless.up.railway.app/api/check-admin", {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Fetch movie details from API
-    fetch(`https://capstoneproject-production-913d.up.railway.app/api/movies/${movieId}`)
+    fetch(`https://moreorless.up.railway.app/api/movies/${movieId}`)
         .then(response => response.json())
         .then(movie => {
            
@@ -170,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
             star.classList.toggle("active", index < starIndex);
         });
 
-        fetch(`https://capstoneproject-production-913d.up.railway.app/api/movies/${movieId}/review`, {
+        fetch(`https://moreorless.up.railway.app/api/movies/${movieId}/review`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -202,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const userRating = document.querySelectorAll('.star.active').length; 
             const movieId = new URLSearchParams(window.location.search).get('id');
             if (movieId && userRating) {
-                fetch(`https://capstoneproject-production-913d.up.railway.app/api/movies/${movieId}/save`, {
+                fetch(`https://moreorless.up.railway.app/api/movies/${movieId}/save`, {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
