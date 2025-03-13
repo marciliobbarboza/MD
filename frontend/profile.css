@@ -245,3 +245,46 @@ h1 {
 a {
     text-decoration: none; /* removes underline */
 }
+
+@media (max-width: 1024px) {
+    header { flex-direction: column; padding: 20px; }
+    nav { flex-direction: column; align-items: center; gap: 15px; }
+    .filters { flex-direction: column; align-items: center; gap: 10px; }
+    .content-grid { grid-template-columns: 1fr; gap: 30px; justify-items: center; }
+    .card { width: 180px; height: 270px; margin-bottom: 20px; }
+    .rating { flex-direction: row; justify-content: center; gap: 10px; }
+}
+
+@media (max-width: 768px) {
+    header { flex-direction: column; padding: 15px 10px; }
+    nav { flex-direction: column; gap: 20px; }
+    nav a { font-size: 1.3rem; }
+    .filters { flex-direction: column; gap: 10px; }
+    .content-grid { grid-template-columns: 1fr; gap: 20px; }
+    .card { width: 160px; height: 240px; margin-bottom: 15px; }
+    .rating { flex-direction: row; justify-content: center; gap: 8px; }
+}
+
+@media (max-width: 600px) {
+    body { font-size: 0.9rem; }
+    header { padding: 10px; }
+    .logo { font-size: 20px; }
+    nav { font-size: 1rem; gap: 10px; flex-wrap: wrap; }
+    .filters { flex-direction: column; gap: 8px; }
+    .content-grid { grid-template-columns: 1fr; gap: 15px; }
+    .card { width: 150px; height: 220px; margin-bottom: 10px; }
+    .rating { flex-direction: row; justify-content: center; gap: 5px; }
+    h1 { font-size: 1.5em; }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 0.8rem; }
+    header { padding: 5px 10px; }
+    .logo { font-size: 18px; }
+    nav { font-size: 0.9rem; gap: 8px; }
+    .filters { gap: 6px; }
+    .content-grid { grid-template-columns: 1fr; gap: 10px; }
+    .card { width: 140px; height: 200px; margin-bottom: 8px; }
+    .rating { flex-direction: row; justify-content: center; gap: 4px; }
+    h1 { font-size: 1.3em; }
+}
