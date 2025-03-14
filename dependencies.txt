@@ -4,14 +4,8 @@ npm install pg sequelize
 
 npm install jsonwebtoken bcryptjs express-validator express-rate-limit
 
-
-
 npm install cloudinary multer multer-storage-cloudinary
 
-
 npm install streamifier
-
-
-git reset --hard
 
 4 hours difference from databases
