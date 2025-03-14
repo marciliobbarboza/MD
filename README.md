@@ -42,8 +42,7 @@ First, clone the project onto your local machine:
 
 ### 2. Backend Setup
 **a - Install Dependencies**
-- Navigate to the backend directory and install the required dependencies:
-
+- Navigate to the backend directory and install the required dependencies from dependencies.txt
 - cd backend
 - npm install
 
