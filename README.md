@@ -1,296 +1,177 @@
-# 🎬 More or Less 
-
-The **More or Less** website was thought for film enthusiasts, allowing users to search and rate films and series. The goal is to provide a simple yet comprehensive experience for both experienced moviegoers and those less familiar with the art of cinema. 
-
-## 🚀 Features
-- **Search for Movies and Series** 🎥
-- **Rate Films (1-5 Stars)** ⭐
-- **User Authentication with JWT** 🔐
-- **Admin Management** 🛡️
-- **Cloud Image Storage** 📷
-
----
-
-## 🔗 Link
-https://moreorless.up.railway.app/
-
-## 🛠️ Technologies Used
-
-### **Frontend**
--  HTML, CSS, JavaScript for UI 🃏
-- Railway (Hosting) ☁️
-
-### **Backend**
-- Node.js, Express.js ⚛️
-- Railway (Hosting) ☁️
-
-### **Database**
-- MongoDB Atlas (Free 500MB) 🗄️
-
-### **Image Storage**
-- Cloudinary (Free Plan) 📷
-
----
-
-## 🚧 Setup Instructions
-
-### 1. Clone the Repository
-First, clone the project onto your local machine:
-
-- git clone <repository-link>
-- cd <repository-folder>
-
-### 2. Backend Setup
-**a - Install Dependencies**
-- Navigate to the backend directory and install the required dependencies from dependencies.txt
-- cd backend
-- npm install
-
-**b - Set Up Environment Variables**
-
-Create a `.env` file in the backend directory with the following content:
-
-- MONGO_URI=<your-mongodb-connection-string>
-- CLOUDINARY_API_KEY=<your-cloudinary-api-key>
-- CLOUDINARY_API_SECRET=<your-cloudinary-api-secret>
-- SECRET_KEY=<your-jwt-secret-key>
-- PORT=5000
-
-**c - Start the Backend Server**
-
-Run the following command to start the backend:
-
-- npm start
-
-The backend will run at `http://localhost:5000`.
-
-### 3. Frontend Setup
-**a - Update API URLs**
-
-Update all API calls in the frontend to point to the backend's local address (for development purposes):
-
-- const apiUrl = 'http://localhost:5000';
-
-Replace `apiUrl` wherever the backend URL is used (e.g., in fetch calls).
-
-**b - Open the Frontend**
-
-Since the frontend is static, simply open the `index.html` file in a web browser.
-
-### 4. Database Setup
-**a - MongoDB Cluster**
-
-The project uses MongoDB Atlas as the database. Ensure you:
-
-- Create an account on MongoDB Atlas.
-
-- Set up a free cluster.
-
-- Obtain the connection string and replace `<your-mongodb-connection-string>` in the `.env` file.
-
-**b - Initial Data**
-- Use the `/api/auth/`register route to create users via the frontend.
-
-- Use the `/api/movies` endpoint to add new movie records (admin only).
-
-### 5. Testing the Application
-**a - Authentication**
-- Test the `/api/auth/` register and `/api/auth/` login routes for registering and logging in users.
-
-- Use the JWT token returned from login for authorized actions.
-
-**b - Movie Features**
-- Use `/api/movies` to fetch a list of movies.
-
-- Use `/api/movies/:id/`review to add or update reviews for a movie.
-
-**c Admin Features**
-- Create, update, or delete movies using `/api/movies` (requires admin privileges).
-
----
-
-## 📌 API Endpoints
-
-### 🎞️ 1. Movie Search API
-**Endpoint:** `/api/movies`  
-**Method:** `GET`  
-**Description:** Allows users logged in and not logged in, to search for movies by title and genre.  
-**Example Request:**  
-```http
-GET /API/movies/search?title=The Batman
-```
-**Response:**
-```json
+🎬 MD Reviews and Ratings
+MD Reviews and Ratings is a platform built for true film enthusiasts. Whether you're a seasoned cinephile or just beginning your cinematic journey, this app offers a simple yet feature-rich experience to discover, rate, and discuss films and series.
+________________________________________
+🚀 Key Features
+•	🎥 Search for Movies and Series
+•	⭐ Rate Films from 1 to 5 Stars
+•	🔐 User Authentication with JWT Tokens
+•	🛡️ Admin-Only Movie Management
+•	📷 Cloud-Based Poster and Image Storage
+🌐 Live Demo: https://mdreviewsandratings.up.railway.app/
+(Note: replace this with your MD-branded URL once available)
+________________________________________
+🛠️ Tech Stack Overview
+Frontend
+•	HTML, CSS, JavaScript 🎨
+•	Static deployment via Railway ☁️
+Backend
+•	Node.js, Express.js 🧠
+•	Hosting on Railway ☁️
+Database
+•	MongoDB Atlas (Free 500MB cluster) 🗄️
+Image Hosting
+•	Cloudinary (Free plan) 📷
+________________________________________
+🧪 Setup Instructions
+🔧 1. Clone the Repository
+bash
+CopiarEditar
+git clone <your-repo-url>
+cd <project-directory>
+________________________________________
+🔙 2. Backend Setup
+a. Install Dependencies
+bash
+CopiarEditar
+cd backend
+npm install
+b. Configure Environment Variables
+Create a .env file in the backend/ directory with:
+ini
+CopiarEditar
+MONGO_URI=<your-mongodb-connection-string>
+CLOUDINARY_API_KEY=<your-api-key>
+CLOUDINARY_API_SECRET=<your-api-secret>
+SECRET_KEY=<your-secret-key>
+PORT=5000
+c. Run the Backend Server
+bash
+CopiarEditar
+npm start
+Your backend will be running at http://localhost:5000.
+________________________________________
+🖥️ 3. Frontend Setup
+a. API URL Configuration
+Update all frontend API calls to point to your local backend for development:
+js
+CopiarEditar
+const apiUrl = 'http://localhost:5000';
+Replace this URL in all relevant fetch() or Axios calls.
+b. Launch the Frontend
+Just open index.html in your browser. The frontend is static.
+________________________________________
+🗃️ 4. Database Setup
+a. Create MongoDB Cluster
+•	Sign up at MongoDB Atlas
+•	Create a free cluster and retrieve your connection string
+•	Paste it into .env as MONGO_URI
+b. Add Initial Data
+•	Register users using the /api/auth/register route
+•	Admins can add movies via /api/movies POST request
+________________________________________
+🧪 5. Application Testing
+a. Authentication
+•	Register users via /api/auth/register
+•	Log in using /api/auth/login to receive a JWT
+•	Use JWT to authorize other API actions
+b. Movie Features
+•	GET /api/movies to search or list all movies
+•	POST /api/movies/:id/review to submit a rating (JWT required)
+c. Admin Panel
+•	POST /api/movies to add movies (Admin JWT required)
+•	Full CRUD support for movie management
+________________________________________
+🔗 Core API Endpoints (MD Reviews and Ratings)
+________________________________________
+🎞️ 1. Search Movies or Series
+Endpoint: GET /api/movies/search?title=Batman
+Description: Open to all users. Filters by title and genre.
+Response:
+json
+CopiarEditar
 {
   "movies": [
-    {"title": "The Batman","genre": "Action" "Drama", "rating": 4, "year": 2022,
-    "poster": "...jpg"}
+    {
+      "title": "The Batman",
+      "genre": ["Action", "Drama"],
+      "rating": 4,
+      "year": 2022,
+      "poster": "image_url.jpg"
+    }
   ]
 }
-```
-
----
-
-### ⭐ 2. Movie Rating API
-**Endpoint:** `/api/movies/{id}/review`  
-**Method:** `POST`  
-**Authorization:** Requires User JWT Token.
-**Request Body:**
-```json
+________________________________________
+⭐ 2. Rate a Movie
+Endpoint: POST /api/movies/:id/review
+Authorization: User JWT required
+Request Body:
+json
+CopiarEditar
 {
   "rating": 1 to 5
 }
-```
-**Response:**
-```json
-{ "status": "Rating successfully saved" }
-```
-
----
-
-### 🎞️ 3. Add or Update Movie Review API
-**Endpoint:** `/api/movies/:id/review`  
-**Method:** `POST`  
-**Authorization:** Requires User JWT Token. 
-**Request Body:**
-```json
-{
-  "rating": 5
-}
-```
-**Response: (Successful Review Update):**
-```json
-{ 
-  "message": "Review added/updated successfully"
-}
-```
-
----
-
-### 🔐 4. User Authentication API
-**Endpoint:** `/api/auth/register`  
-**Method:** `POST`  
-**Request Body:**
-```json
+Response:
+json
+CopiarEditar
+{ "message": "Review added/updated successfully" }
+________________________________________
+🔐 3. Register a New User
+Endpoint: POST /api/auth/register
+Request Body:
+json
+CopiarEditar
 {
   "name": "Peter Parker",
   "email": "spider@example.com",
   "password": "iamspiderman"
 }
-```
-**Response: (Successful registration):**
-```json
-{
-  "message": "User registered successfully!"
-}
-```
-**Response: (If email already exists):**
-```json
-{
-  "error": "User already exists."
-}
-```
-
----
-
-### ▶️ 5. Login User API
-**Endpoint:** `/api/auth/login`  
-**Method:** `POST`  
-**Request Body:**
-```json
+Response:
+json
+CopiarEditar
+{ "message": "User registered successfully!" }
+________________________________________
+▶️ 4. Login a User
+Endpoint: POST /api/auth/login
+Request Body:
+json
+CopiarEditar
 {
   "email": "spider@example.com",
   "password": "iamspiderman"
 }
-```
-**Response: (Successful login)**
-```json
-
-{ 
+Response:
+json
+CopiarEditar
+{
   "token": "your_jwt_token_here",
   "username": "Peter Parker"
 }
-```
-**Response: (Invalid credentials)**
-```json
+________________________________________
+🧙‍♂️ 5. Admin: Add a New Movie
+Endpoint: POST /api/movies
+Authorization: Admin JWT token
+Request Body:
+json
+CopiarEditar
 {
-  "error": "Invalid credentials"
-}
-```
-
----
-
-### 🧙‍♂️ 6. Add New Movie (Admin Only) API
-**Endpoint:** `/api/movies`  
-**Method:** `POST`  
-**Authorization:** Requires Admin JWT Token.. 
-**Request Body:**
-```json
-{
-   "title": "New Movie",
+  "title": "New Movie",
   "genre": ["Action", "Adventure"],
   "rating": 4,
   "year": 2023,
   "type": "movie",
   "poster": "image_url"
 }
-```
-**Response: (Successful addition)**
-```json
-
-{ 
+Response:
+json
+CopiarEditar
+{
   "message": "Movie added successfully!",
-  "movie": {
-    "title": "New Movie",
-    "genre": ["Action", "Adventure"],
-    "rating": 4.5,
-    "year": 2023,
-    "type": "movie",
-    "poster": "image_url"
-  }
+  "movie": { ... }
 }
-```
-
----
-
-## ❌ Error Handling
-- `400 Bad Request` – Invalid input (e.g., missing parameters)
-- `401 Unauthorized` – Invalid or missing JWT token
-- `404 Not Found` – Resource not found
-- `500 Internal Server Error` – Unexpected server issue
-
----
-
-## 🎨 Planned UI
-**Home Page**
-
-![Image](https://github.com/user-attachments/assets/dbf16768-5bd0-4622-b3ad-9a22a8c05db9)
-
-**Filme Page**
-
-![Image](https://github.com/user-attachments/assets/28a0b9ea-5beb-439f-9b7a-53d3b372088c)
-
-**Movie Description (when logged in)**
-
-![Image](https://github.com/user-attachments/assets/860bbbce-288c-455e-b11c-59b4c338bbc5)
-
-**User Profile**
-
-![Image](https://github.com/user-attachments/assets/fd379f82-3d19-4c1e-aeab-3be41095e9fe)
-
-UI design referencesy:
-- [Letterboxd](https://letterboxd.com)
-- [Rotten Tomatoes](https://www.rottentomatoes.com)
-- [IMDb](https://www.imdb.com/)
-
----
-
-## 📜 ER Diagram
-![Image](https://github.com/user-attachments/assets/b2932629-2138-4b09-a2f8-6e4d1180dc2e)
-
----
-
-
-
-
-
+________________________________________
+❌ Error Responses
+Code	Description
+400	Bad Request – Invalid/missing parameters
+401	Unauthorized – JWT missing or invalid
+404	Not Found – Resource not found
+500	Internal Server Error – Unexpected issue
