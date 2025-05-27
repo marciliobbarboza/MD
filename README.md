@@ -98,6 +98,3 @@ Commit your changes: git commit -m "Add your message"
 Push to the branch: git push origin feature/YourFeature
 Open a pull request.
 See CONTRIBUTING.md for more details.
-
-📷 Screenshots
-<p align="center"> <img src="https://user-images.githubusercontent.com/your-username/screenshot1.png" width="400"> <img src="https://user-images.githubusercontent.com/your-username/screenshot2.png" width="400"> </p>
