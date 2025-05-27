@@ -24,7 +24,7 @@ nav {
     flex-wrap: wrap; 
 }
 
-img[src="MoreOrLess.png"] {
+img[src="MD.png"] {
     max-width: 500px; 
     height: auto; 
     transition: all 0.3s ease; 
