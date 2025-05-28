@@ -75,7 +75,7 @@ router.post(
         return res.status(400).json({ error: "Invalid credentials" });
       }
 
-      const token = jwt.sign({ userId: user._id }, "secretKey", { expiresIn: "1h" });
+      const token = jwt.sign({ userId: user._id }, "TUQ6c2VjcmV0a2V5", { expiresIn: "1h" });
 
       res.json({ token, username: user.name });
     } catch (error) {
